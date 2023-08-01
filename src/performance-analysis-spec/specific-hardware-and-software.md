@@ -89,5 +89,3 @@ overhead of an optimized CHERI implementation against the Morello baseline
 (Neoverse N1) microarchitecture with elimination of the data-dependent
 exception issue; as above, the microarchitectural change should not affect
 this workload.
-
-A larger version of this figure appears at the end of this report.

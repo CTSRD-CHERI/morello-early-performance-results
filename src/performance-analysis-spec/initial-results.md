@@ -1,4 +1,5 @@
 # Initial results
+
 Using the baseline pure-capability code generation combined with an unmodified
 microarchitecture yields 28.01% geometric mean overhead for the training
 workload of SPECint 2006.
@@ -27,3 +28,6 @@ of software and hardware, it is reasonable to project that the goal of 2%-3%
 overhead for deterministic spatial and referential memory safety is achievable
 with an optimized instruction-set architecture on a performance-optimized
 microarchitecture.
+
+![Chart: SPECint performance overheads across ABIs and hardware implementation
+  variations (all measured on FPGA)](specint-detailed-results.jpg)
