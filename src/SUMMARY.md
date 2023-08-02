@@ -1,4 +1,4 @@
-[Early Performance Results from the Prototype Morello Microarchitecture](cover/README.md)
+[Early performance results from the prototype Morello microarchitecture](cover/README.md)
 
 - [Introduction](introduction/README.md)
 - [Headline results](headline-results/README.md)

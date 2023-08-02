@@ -1,6 +1,6 @@
 <!-- ANCHOR: cover -->
 
-# Early Performance Results from the Prototype Morello Microarchitecture
+# Early performance results from the prototype Morello microarchitecture
 
 Robert N. M. Watson (University of Cambridge),
 Jessica Clarke (University of Cambridge),
