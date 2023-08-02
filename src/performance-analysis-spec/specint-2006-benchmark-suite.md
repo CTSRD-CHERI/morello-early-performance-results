@@ -33,7 +33,7 @@ but as-yet unresolved compiler issues affecting comparability:
 |----------------|---------------------------------|-------------------------|
 | 400.perlbench  | Various Perl language workloads | Old version of perl not adapted to CHERI C/C++ |
 | 403.gcc        | C compiler workload             | Old version of gcc not adapted to CHERI C/C++ |
-| 429.mcf        | Vehicle scheduling              | CHERI C/C++ adaptations fixing undefined behavior relating to realloc() are unofficial, and further changes to mitigate additional CHERI-induced padding due to pointer alignment mean that results are less comparable to stock SPECint 2016. |
+| 429.mcf        | Vehicle scheduling              | CHERI C/C++ adaptations fixing undefined behavior relating to realloc() are unofficial, and further changes to mitigate additional CHERI-induced padding due to pointer alignment mean that results are less comparable to stock SPECint 2006. |
 | 462.libquantum | Quantum computer simulation     | Benchmark runs 30% faster than the aarch64 version since 128-bit pointers inhibit vectorization in a case where vectorization is that turns out to not be harmful on the N1SDP microarchitecture. |
 
 All benchmark binaries are compiled at -O3, and are statically linked.
