@@ -12,7 +12,7 @@ microarchitectural changes are used.
 It reflects the performance of legacy aarch64 (64-bit) code on Morello without
 fixes to the data-dependent exception issue.
 
-## Purecap ABI
+## Purecap ABI (w/o data-dependency fix)
 
 This configuration presents worst-case performance for the shipping Morello
 design, as it contains no improvements to the microarchitecture relative to
@@ -28,7 +28,7 @@ This configuration is known to trigger the PCC branch-prediction issue during
 calls into short functions, function returns, and jump tables &mdash; a change
 that is now also used in baseline pure-capability code generation.
 
-## Benchmark ABI
+## Benchmark ABI (w/o data-dependency fix)
 
 This configuration is based on the purecap configuration, but with a shift to
 the "Benchmark ABI", which modifies default bounds on code pointers to be
@@ -40,7 +40,7 @@ limitations](../performance-methodology/morello-microarchitectural-limitations.m
 This workaround should especially recover non-essential overhead associated
 with jump tables and calls into short functions.
 
-## Benchmark ABI (w/data-dependency fix)
+## Benchmark ABI (w/ data-dependency fix)
 
 This configuration is based on the Benchmark ABI configuration, only run with
 a modified microarchitecture that addresses the data-dependent exception issue
@@ -49,7 +49,7 @@ limitations](../performance-methodology/morello-microarchitectural-limitations.m
 The data-dependency fix avoids undesirable (and likely unnecessary in more
 recent baseline microarchitectures) stalls on capability stores.
 
-## P128 Forced GOT (w/data-dependency fix)
+## P128 Forced GOT (w/ data-dependency fix)
 
 This configuration is based on the P128 compilation mode, which widens
 language-level pointers to capability width (128 bits) to emulate the
@@ -73,7 +73,7 @@ only 64-bit values are loaded and stored.
 For implied register saves and restores, storage is not widened.
 GOT entries, including those used for the PLT, remain 64 bit.
 
-## P128 (w/data-dependency fix)
+## P128 (w/ data-dependency fix)
 
 This configuration is identical to the P128 Forced-GOT configuration except
 that access to globals is sometimes performed via PCC, bypas
