@@ -2,7 +2,7 @@
 
 Arm’s Morello[^1] is a first-generation, CHERI-enabled prototype CPU based on
 Arm’s Neoverse N1, as found in the N1SDP evaluation board.
-CHERI is an architectural feature that promises to dramatically improve
+CHERI[^2] is an architectural feature that promises to dramatically improve
 software security through fine-grained memory protection and scalable
 compartmentalization.
 Supported by UKRI, Morello is a research platform to evaluate CHERI at an
