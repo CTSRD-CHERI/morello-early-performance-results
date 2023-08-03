@@ -38,3 +38,7 @@ Building the book from the Markdown sources requires
 will build the static HTML files in the `book/` directory, whilst `mdbook
 serve` will build and serve them at `http://localhost:3000`. Please refer to
 the mdBook documentation for futher options.
+
+There is also a Makefile for building a PDF version of this book, which
+additionally requires [pandoc](https://pandoc.org). Once pandoc is installed,
+`make` will build a PDF called `book.pdf`.

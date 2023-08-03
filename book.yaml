@@ -1,0 +1,16 @@
+---
+documentclass: article
+classoption:
+- 12pt
+- twoside
+- openright
+- a4paper
+geometry:
+- inner=25mm
+- outer=25mm
+- top=20mm
+- bottom=20mm
+pagestyle: headings
+numbersections: true
+secnumdepth: 3
+colorlinks: true
