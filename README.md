@@ -29,6 +29,8 @@ creation of Morello, and also the significant investment by DARPA in
 supporting the creation of CHERI and its earlier prototypes.
 We also acknowledge Arm Limited and Google, Inc.
 
+<!-- ANCHOR_END: cover -->
+
 ## Building
 
 Building the book from the Markdown sources requires
