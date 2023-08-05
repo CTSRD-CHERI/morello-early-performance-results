@@ -30,4 +30,4 @@ with an optimized instruction-set architecture on a performance-optimized
 microarchitecture.
 
 ![Chart: SPECint performance overheads across ABIs and hardware implementation
-  variations (all measured on FPGA)](specint-detailed-results.jpg)
+  variations (all measured on FPGA)](specint-detailed-results.svg)

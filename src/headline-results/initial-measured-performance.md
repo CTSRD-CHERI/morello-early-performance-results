@@ -14,7 +14,7 @@ implications of using the ‘train’ workload, and why), may be found in Sectio
 [3](../performance-methodology/index.md#performance-methodology).
 
 ![Chart: Mean SPECint overheads for memory-safey code on Morello
-  (FPGA)](specint-overhead-summary.jpg)
+  (FPGA)](specint-overhead-summary.svg)
 
 ## Result on unmodified Morello microarchitecture on FPGA
 
