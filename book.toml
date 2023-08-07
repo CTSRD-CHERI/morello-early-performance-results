@@ -1,2 +1,16 @@
+[book]
+authors = ["Robert N. M. Watson", "Silviu Baranga", "Graeme Barnes",
+  "Jessica Clarke", "Richard Grisenthwaite", "Peter Sewell",
+  "Simon W. Moore", "Alexander Richardson", "Kathryn Stacer",
+  "Jonathan Woodruff"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Early performance results from the prototype Morello microarchitecture"
+
+[output.html]
+git-repository-url = "https://github.com/CTSRD-CHERI/morello-early-performance-results"
+site-url = "/morello-early-performance-results/"
+
 [output.html]
 [output.markdown]
