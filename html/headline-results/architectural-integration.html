@@ -1,0 +1,269 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Architectural integration - Early performance results from the prototype Morello microarchitecture</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../cover/index.html">Early performance results from the prototype Morello microarchitecture</a></li><li class="chapter-item expanded "><a href="../introduction/index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../headline-results/index.html"><strong aria-hidden="true">2.</strong> Headline results</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../headline-results/architectural-integration.html" class="active"><strong aria-hidden="true">2.1.</strong> Architectural integration</a></li><li class="chapter-item expanded "><a href="../headline-results/software-ecosystem-enablement.html"><strong aria-hidden="true">2.2.</strong> Software ecosystem enablement</a></li><li class="chapter-item expanded "><a href="../headline-results/microarchitectural-objectives.html"><strong aria-hidden="true">2.3.</strong> Microarchitectural objectives</a></li><li class="chapter-item expanded "><a href="../headline-results/dynamic-performance.html"><strong aria-hidden="true">2.4.</strong> Dynamic performance</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../headline-results/essential-overheads.html"><strong aria-hidden="true">2.4.1.</strong> Essential overheads</a></li><li class="chapter-item expanded "><a href="../headline-results/initial-measured-performance.html"><strong aria-hidden="true">2.4.2.</strong> Initial measured performance results</a></li><li class="chapter-item expanded "><a href="../headline-results/next-steps.html"><strong aria-hidden="true">2.4.3.</strong> Next steps</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../performance-methodology/index.html"><strong aria-hidden="true">3.</strong> Performance methodology</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../performance-methodology/baseline-and-comparison-framework.html"><strong aria-hidden="true">3.1.</strong> Baseline and comparison framework</a></li><li class="chapter-item expanded "><a href="../performance-methodology/morello-microarchitectural-limitations.html"><strong aria-hidden="true">3.2.</strong> Morello microarchitectural limitations</a></li><li class="chapter-item expanded "><a href="../performance-methodology/abis-code-generation-and-compilation.html"><strong aria-hidden="true">3.3.</strong> ABIs, code generation, and compilation</a></li></ol></li><li class="chapter-item expanded "><a href="../performance-analysis-spec/index.html"><strong aria-hidden="true">4.</strong> Performance analysis of SPECint 2006</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../performance-analysis-spec/specint-2006-benchmark-suite.html"><strong aria-hidden="true">4.1.</strong> SPECint 2006 benchmark suite</a></li><li class="chapter-item expanded "><a href="../performance-analysis-spec/specific-hardware-and-software.html"><strong aria-hidden="true">4.2.</strong> Specific hardware and software configurations</a></li><li class="chapter-item expanded "><a href="../performance-analysis-spec/initial-results.html"><strong aria-hidden="true">4.3.</strong> Initial results</a></li></ol></li><li class="chapter-item expanded "><a href="../caveats/index.html"><strong aria-hidden="true">5.</strong> Caveats</a></li><li class="chapter-item expanded "><a href="../future-work/index.html"><strong aria-hidden="true">6.</strong> Future work</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Early performance results from the prototype Morello microarchitecture</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        <a href="https://github.com/CTSRD-CHERI/morello-early-performance-results" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#architectural-integration" id="architectural-integration">Architectural integration</a></h1>
+<p>A key aim for the Morello Programme was to establish an integration of the
+CHERI protection model with the baseline Armv8.2-A architecture that was
+sympathetic to the instruction-set philosophy and its goals.
+This aim was met through a set of adaptations to the CHERI approach including
+a deemphasis of architectural exceptions during register-to-register
+operations, the introduction of a “capability mode” that enables capability
+addressing for existing load and store instructions to conserve opcode space,
+and integrating CHERI with other contemporary architectural features such as
+hypervisor extensions that had not been present in earlier MIPS-based CHERI
+prototypes.</p>
+<p>These architectural extensions are described in detail in Arm’s Morello
+architecture specification<sup class="footnote-reference"><a href="#1">1</a></sup>, with SRI International and the University of
+Cambridge’s CHERI ISAv8<sup class="footnote-reference"><a href="#2">2</a></sup> providing more detailed rationale for aspects of
+the design and its implications for microarchitecture.
+Machine-checked formal proof ensures that the CHERI-extended Morello ISA
+specification preserves key security properties for any possible code
+sequence<sup class="footnote-reference"><a href="#3">3</a></sup>. Results to date give us strong confidence that CHERI support can
+be tightly and cleanly integrated into future Arm architectures.</p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>Arm Limited. <a href="https://developer.arm.com/documentation/ddi0606/latest">Arm Architecture Reference Manual Supplement - Morello
+for A-profile
+Architecture</a>.</p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p>Watson, et al. <a href="https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-951.pdf">Capability Hardware Enhanced RISC Instructions: CHERI
+Instruction-Set Architecture (Version
+8)</a>.</p>
+</div>
+<div class="footnote-definition" id="3"><sup class="footnote-definition-label">3</sup>
+<p>Bauereiss et al., <a href="http://www.cl.cam.ac.uk/%7Epes20/morello-proofs-esop2022.pdf">Verified Security for the Morello Capability-enhanced
+Prototype Arm
+Architecture</a>,
+ESOP 2022</p>
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../headline-results/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../headline-results/software-ecosystem-enablement.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../headline-results/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../headline-results/software-ecosystem-enablement.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

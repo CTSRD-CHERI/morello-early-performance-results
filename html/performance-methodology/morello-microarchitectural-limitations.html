@@ -1,0 +1,282 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Morello microarchitectural limitations - Early performance results from the prototype Morello microarchitecture</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../cover/index.html">Early performance results from the prototype Morello microarchitecture</a></li><li class="chapter-item expanded "><a href="../introduction/index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../headline-results/index.html"><strong aria-hidden="true">2.</strong> Headline results</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../headline-results/architectural-integration.html"><strong aria-hidden="true">2.1.</strong> Architectural integration</a></li><li class="chapter-item expanded "><a href="../headline-results/software-ecosystem-enablement.html"><strong aria-hidden="true">2.2.</strong> Software ecosystem enablement</a></li><li class="chapter-item expanded "><a href="../headline-results/microarchitectural-objectives.html"><strong aria-hidden="true">2.3.</strong> Microarchitectural objectives</a></li><li class="chapter-item expanded "><a href="../headline-results/dynamic-performance.html"><strong aria-hidden="true">2.4.</strong> Dynamic performance</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../headline-results/essential-overheads.html"><strong aria-hidden="true">2.4.1.</strong> Essential overheads</a></li><li class="chapter-item expanded "><a href="../headline-results/initial-measured-performance.html"><strong aria-hidden="true">2.4.2.</strong> Initial measured performance results</a></li><li class="chapter-item expanded "><a href="../headline-results/next-steps.html"><strong aria-hidden="true">2.4.3.</strong> Next steps</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../performance-methodology/index.html"><strong aria-hidden="true">3.</strong> Performance methodology</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../performance-methodology/baseline-and-comparison-framework.html"><strong aria-hidden="true">3.1.</strong> Baseline and comparison framework</a></li><li class="chapter-item expanded "><a href="../performance-methodology/morello-microarchitectural-limitations.html" class="active"><strong aria-hidden="true">3.2.</strong> Morello microarchitectural limitations</a></li><li class="chapter-item expanded "><a href="../performance-methodology/abis-code-generation-and-compilation.html"><strong aria-hidden="true">3.3.</strong> ABIs, code generation, and compilation</a></li></ol></li><li class="chapter-item expanded "><a href="../performance-analysis-spec/index.html"><strong aria-hidden="true">4.</strong> Performance analysis of SPECint 2006</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../performance-analysis-spec/specint-2006-benchmark-suite.html"><strong aria-hidden="true">4.1.</strong> SPECint 2006 benchmark suite</a></li><li class="chapter-item expanded "><a href="../performance-analysis-spec/specific-hardware-and-software.html"><strong aria-hidden="true">4.2.</strong> Specific hardware and software configurations</a></li><li class="chapter-item expanded "><a href="../performance-analysis-spec/initial-results.html"><strong aria-hidden="true">4.3.</strong> Initial results</a></li></ol></li><li class="chapter-item expanded "><a href="../caveats/index.html"><strong aria-hidden="true">5.</strong> Caveats</a></li><li class="chapter-item expanded "><a href="../future-work/index.html"><strong aria-hidden="true">6.</strong> Future work</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Early performance results from the prototype Morello microarchitecture</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        <a href="https://github.com/CTSRD-CHERI/morello-early-performance-results" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#morello-microarchitectural-limitations" id="morello-microarchitectural-limitations">Morello microarchitectural limitations</a></h1>
+<p>The following microarchitecture limitations arose due to the constrained timeline of the Morello development process. All are believed resolvable with a full-length design and optimization cycle used with production hardware.</p>
+<ul>
+<li><strong>PCC branch-prediction</strong> This issue prevents proper speculation around
+changes in PC bounds — due to limitations in changes that could be
+made relative to the baseline design in this research programme.
+As a result, additional stalls are incurred when performing inter-library
+pure-capability function calls or returns when the results of any updated
+bounds on PCC are depended on.
+This occurs, for example, when PC-relative accesses to globals, or function
+calls or returns, depend on the value of PCC.
+This can be worked around via the &quot;Benchmark ABI&quot;, which avoids
+capability-based jumps and hence additional stalls; see below for details of
+this ABI.</li>
+<li><strong>Data-dependent exception</strong> support during capability stores introduces a
+stall in address translation.
+This exception is motivated by MMU support for capability tracking, used for
+heap temporal memory safety in CHERI.
+The underlying Armv8.2 architecture targeted by the initial Neoverse N1 has
+no concept of data-dependent exceptions on stores, and that
+micro-architecture does not have a structure that supports data-dependent
+exceptions for stores in an efficient way.
+Arm's Memory Tagging Extensions (MTE) have a similar requirement and so more
+recent Arm microarchitectures are much more optimized in this regard.</li>
+<li><strong>Untuned store throughput and buffer sizes</strong> due to memory buses not having
+been widened.
+Whereas store-pair instructions from 64-bit Armv8-A can execute in one cycle
+and occupy a single store-buffer entry, store-pair instructions for 128-bit
+capabilities execute in two cycles and occupy two store-buffer entries.
+Store throughput and the store buffer were sized based on aarch64 code
+measurements, and can become congested when storing capability pairs as a
+result of retaining that size in Morello.</li>
+<li><strong>The MADD instruction</strong>, which performs a multiply-and-add, is used both
+for matrix operations and to calculate array and data-structure offsets.
+In Morello, a version operating on capabilities is omitted, leading to
+code-generation inefficiency when performing some types of memory accesses
+(seen particularly in the SPECint gobmk benchmark).</li>
+</ul>
+<p>More generally, when comparing performance, consideration should be made for
+the differing levels of optimisation between baseline 64-bit Armv8-A
+instructions in the Neoverse N1, and instructions added as part of the Morello
+architecture.
+As a result, there may be further microarchitectural optimizations that do not
+properly apply when using CHERI-enabled code.
+For example, we have not yet reviewed the full set of memory prefetchers to
+make sure they behave well with pure-capability code.
+We have ongoing investigations in a number of these areas (see below for
+examples).</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../performance-methodology/baseline-and-comparison-framework.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../performance-methodology/abis-code-generation-and-compilation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../performance-methodology/baseline-and-comparison-framework.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../performance-methodology/abis-code-generation-and-compilation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
