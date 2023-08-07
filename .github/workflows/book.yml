@@ -42,7 +42,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: book
-          path: morello-early-performance-results
+          path: morello-early-performance-results-snapshot
 
       - name: Create archive
         run: zip -r morello-early-performance-results-snapshot-${{ github.sha }}.zip morello-early-performance-results-snapshot
