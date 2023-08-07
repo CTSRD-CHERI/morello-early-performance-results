@@ -12,5 +12,4 @@ title = "Early performance results from the prototype Morello microarchitecture"
 git-repository-url = "https://github.com/CTSRD-CHERI/morello-early-performance-results"
 site-url = "/morello-early-performance-results/"
 
-[output.html]
 [output.markdown]
