@@ -11,7 +11,7 @@ Graeme Barnes (Arm Limited),
 Richard Grisenthwaite (Arm Limited),
 Kathryn Stacer (Arm Limited),
 Silviu Baranga (Arm Limited), and
-Alexander Richardson (University of Cambridge)
+Alexander Richardson (Google LLC)
 
 *This is a living document; feedback and contributions are welcomed.
 Please see our
