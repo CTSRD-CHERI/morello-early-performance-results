@@ -2,16 +2,16 @@
 
 # Early performance results from the prototype Morello microarchitecture
 
-Robert N. M. Watson (University of Cambridge),
-Jessica Clarke (University of Cambridge),
-Peter Sewell (University of Cambridge),
-Jonathan Woodruff (University of Cambridge),
-Simon W. Moore (University of Cambridge),
-Graeme Barnes (Arm Limited),
-Richard Grisenthwaite (Arm Limited),
-Kathryn Stacer (Arm Limited),
-Silviu Baranga (Arm Limited), and
-Alexander Richardson (Google LLC)
+* Robert N. M. Watson (University of Cambridge),
+* Jessica Clarke (University of Cambridge),
+* Peter Sewell (University of Cambridge),
+* Jonathan Woodruff (University of Cambridge),
+* Simon W. Moore (University of Cambridge),
+* Graeme Barnes (Arm Limited),
+* Richard Grisenthwaite (Arm Limited),
+* Kathryn Stacer (Arm Limited),
+* Silviu Baranga (Arm Limited), and
+* Alexander Richardson (Google LLC)
 
 *This is a living document; feedback and contributions are welcomed.
 Please see our
