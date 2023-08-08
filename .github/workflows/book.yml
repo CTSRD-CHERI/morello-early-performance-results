@@ -65,7 +65,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: book.pdf
-          path: morello-early-performance-results-snapshot-${{ github.sha }}.pdf
+          path: ./
 
       - name: Create archive
         run: zip -r morello-early-performance-results-snapshot-${{ github.sha }}.zip morello-early-performance-results-snapshot-${{ github.sha }}
@@ -101,7 +101,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: morello-early-performance-results-snapshot-${{ github.sha }}.pdf
+          asset_path: book.pdf
           asset_name: morello-early-performance-results-snapshot-${{ github.sha }}.pdf
           asset_content_type: application/pdf
 
@@ -120,7 +120,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: book.pdf
-          path: morello-early-performance-results-${{ github.event.release.tag_name }}.pdf
+          path: ./
 
       - name: Create archive
         run: zip -r morello-early-performance-results-${{ github.event.release.tag_name }}.zip morello-early-performance-results-${{ github.event.release.tag_name }}
@@ -141,7 +141,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: morello-early-performance-results-${{ github.event.release.tag_name }}.pdf
+          asset_path: book.pdf
           asset_name: morello-early-performance-results-${{ github.event.release.tag_name }}.pdf
           asset_content_type: application/pdf
 
