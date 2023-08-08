@@ -21,31 +21,49 @@ jobs:
       - name: Install mdbook
         run: curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.34/mdbook-v0.4.34-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=$HOME/.cargo/bin
 
+      - name: Install packages
+        run: sudo apt-get update && sudo apt-get install -y make pandoc texlive-latex-extra
+
       - name: Checkout source
         uses: actions/checkout@v2
 
-      - name: Build
+      - name: Build book
         run: mdbook build
+        
+      - name: Build PDF
+        run: make
 
-      - name: Upload artifact
+      - name: Upload book artifact
         uses: actions/upload-artifact@v2
         with:
           name: book
           path: book/html
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: book.pdf
+          path: book.pdf
 
   draft-release:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Download artifact
+      - name: Download book artifact
         uses: actions/download-artifact@v2
         with:
           name: book
-          path: morello-early-performance-results-snapshot
+          path: morello-early-performance-results-snapshot-${{ github.sha }}
+
+      - name: Download PDF artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: book.pdf
+          path: morello-early-performance-results-snapshot-${{ github.sha }}.pdf
 
       - name: Create archive
-        run: zip -r morello-early-performance-results-snapshot-${{ github.sha }}.zip morello-early-performance-results-snapshot
+        run: zip -r morello-early-performance-results-snapshot-${{ github.sha }}.zip morello-early-performance-results-snapshot-${{ github.sha }}
 
       - name: Get current date
         id: date
@@ -62,8 +80,7 @@ jobs:
           body: Latest snapshot (${{ github.sha }})
           prerelease: true
 
-      - name: Upload release asset
-        id: upload-release-asset
+      - name: Upload release book asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -73,22 +90,37 @@ jobs:
           asset_name: morello-early-performance-results-snapshot-${{ github.sha }}.zip
           asset_content_type: application/zip
 
+      - name: Upload release PDF asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: morello-early-performance-results-snapshot-${{ github.sha }}.pdf
+          asset_name: morello-early-performance-results-snapshot-${{ github.sha }}.pdf
+          asset_content_type: application/pdf
+
   release:
     if: github.event_name == 'release' && github.event.action == 'created'
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Download artifact
+      - name: Download book artifact
         uses: actions/download-artifact@v2
         with:
           name: book
           path: morello-early-performance-results-${{ github.event.release.tag_name }}
 
+      - name: Download PDF artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: book.pdf
+          path: morello-early-performance-results-${{ github.event.release.tag_name }}.pdf
+
       - name: Create archive
         run: zip -r morello-early-performance-results-${{ github.event.release.tag_name }}.zip morello-early-performance-results-${{ github.event.release.tag_name }}
 
-      - name: Upload release asset
-        id: upload-release-asset
+      - name: Upload release book asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -98,12 +130,22 @@ jobs:
           asset_name: morello-early-performance-results-${{ github.event.release.tag_name }}.zip
           asset_content_type: application/zip
 
+      - name: Upload release PDF asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: morello-early-performance-results-${{ github.event.release.tag_name }}.pdf
+          asset_name: morello-early-performance-results-${{ github.event.release.tag_name }}.pdf
+          asset_content_type: application/pdf
+
   deploy:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Download artifact
+      - name: Download book artifact
         uses: actions/download-artifact@v2
         with:
           name: book
