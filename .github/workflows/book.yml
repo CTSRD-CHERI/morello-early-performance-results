@@ -31,7 +31,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: book
-          path: book
+          path: book/html
 
   draft-release:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
