@@ -45,3 +45,8 @@ of key parameters and behaviors driven by profiling data that we have already
 been able to collect on the shipped chip.
 This lets us use Morello-derived measurements to estimate performance of more
 optimized potential future implementations.
+
+Please see later sections [Performance
+methodology](../performance-methodology/) and [Performance analysis of SPECint
+2006](../performance-analysis-spec/) for significant greater detail on our
+approach and results presented in the remainder of this section.
