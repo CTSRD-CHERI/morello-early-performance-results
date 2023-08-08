@@ -13,8 +13,8 @@ high-performance I/O via PCIe.
 
 Over the past year, Morello has supported a vast increase in the size of the
 CHERI software ecosystem, driven by over 70 companies, universities, and
-governmental organizations, which have collectively adapted an estimate of
-over 100MLoC of open-source software to CHERI memory safety.
+governmental organizations, which have collectively adapted over 100MLoC of
+open-source software to CHERI memory safety, according to current estimates.
 This includes memory-safe FreeBSD kernel and userlevel, Linux BusyBox, Wayland
 window server and KDE Plasma desktop, and approaching ten thousand open-source
 software packages.
