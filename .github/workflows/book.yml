@@ -59,10 +59,14 @@ jobs:
         id: date
         run: echo "result=$(date -u +'%Y%m%d')" >> "$GITHUB_OUTPUT"
 
-      - uses: actions/github-script@v6
+      - name: Compute tag name
         id: tag-name
+        uses: actions/github-script@v6
+        env:
+          DATE: ${{ steps.date.outputs.result }}
+          HASH: ${{ github.sha }}
         with:
-          script: return "draft-" + steps.date.outputs.result + "-" + github.sha.substr(0, 12)
+          script: return "draft-" + process.env.DATE + "-" + process.env.HASH.substr(0, 12)
           result-encoding: string
 
       - name: Download book artifact
