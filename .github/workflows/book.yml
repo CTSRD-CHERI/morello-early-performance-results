@@ -55,11 +55,21 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Get current date
+        id: date
+        run: echo "result=$(date -u +'%Y%m%d')" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/github-script@v6
+        id: tag-name
+        with:
+          script: return "draft-" + steps.date.outputs.result + "-" + github.sha.substr(0, 12)
+          result-encoding: string
+
       - name: Download book artifact
         uses: actions/download-artifact@v2
         with:
           name: book
-          path: morello-early-performance-results-snapshot-${{ github.sha }}
+          path: morello-early-performance-results-${{ steps.tag-name.outputs.result }}
 
       - name: Download PDF artifact
         uses: actions/download-artifact@v2
@@ -68,11 +78,7 @@ jobs:
           path: ./
 
       - name: Create archive
-        run: zip -r morello-early-performance-results-snapshot-${{ github.sha }}.zip morello-early-performance-results-snapshot-${{ github.sha }}
-
-      - name: Get current date
-        id: date
-        run: echo "::set-output name=date::$(date -u +'%Y%m%d')"
+        run: zip -r morello-early-performance-results-${{ steps.tag-name.outputs.result }}.zip morello-early-performance-results-${{ steps.tag-name.outputs.result }}
 
       - name: Create release
         id: create_release
@@ -80,8 +86,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: draft-${{ steps.date.outputs.date }}-${{ github.sha }}
-          release_name: Draft release ${{ steps.date.outputs.date }}
+          tag_name: ${{ steps.tag-name.outputs.result }}
+          release_name: Draft release ${{ steps.date.outputs.result }}
           body: Latest snapshot (${{ github.sha }})
           prerelease: true
 
@@ -91,8 +97,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: morello-early-performance-results-snapshot-${{ github.sha }}.zip
-          asset_name: morello-early-performance-results-snapshot-${{ github.sha }}.zip
+          asset_path: morello-early-performance-results-${{ steps.tag-name.outputs.result }}.zip
+          asset_name: morello-early-performance-results-${{ steps.tag-name.outputs.result }}.zip
           asset_content_type: application/zip
 
       - name: Upload release PDF asset
@@ -102,7 +108,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: book.pdf
-          asset_name: morello-early-performance-results-snapshot-${{ github.sha }}.pdf
+          asset_name: morello-early-performance-results-${{ steps.tag-name.outputs.result }}.pdf
           asset_content_type: application/pdf
 
   release:
