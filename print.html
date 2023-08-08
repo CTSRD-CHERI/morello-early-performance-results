@@ -4,27 +4,17 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Early performance results from the prototype Morello microarchitecture</title>
-        
         <meta name="robots" content="noindex" />
-        
-        
 
 
         <!-- Custom HTML head -->
         
-
-
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        
         <link rel="icon" href="favicon.svg">
-        
-        
         <link rel="shortcut icon" href="favicon.png">
-        
         <link rel="stylesheet" href="css/variables.css">
         <link rel="stylesheet" href="css/general.css">
         <link rel="stylesheet" href="css/chrome.css">
@@ -32,9 +22,7 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="fonts/fonts.css">
-        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="highlight.css">
@@ -42,19 +30,18 @@
         <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
 
-        
     </head>
     <body>
+    <div id="body-container">
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -70,7 +57,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -82,12 +69,14 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
-            var sidebar = 'hidden';
+            var sidebar = null;
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
@@ -100,12 +89,33 @@
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
@@ -114,17 +124,15 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
-                        
                     </div>
 
                     <h1 class="menu-title">Early performance results from the prototype Morello microarchitecture</h1>
@@ -133,18 +141,16 @@
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
                         <a href="https://github.com/CTSRD-CHERI/morello-early-performance-results" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+
                     </div>
                 </div>
 
-                
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -152,10 +158,9 @@
                         </ul>
                     </div>
                 </div>
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -165,7 +170,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#early-performance-results-from-the-prototype-morello-microarchitecture" id="early-performance-results-from-the-prototype-morello-microarchitecture">Early performance results from the prototype Morello microarchitecture</a></h1>
+                        <h1 id="early-performance-results-from-the-prototype-morello-microarchitecture"><a class="header" href="#early-performance-results-from-the-prototype-morello-microarchitecture">Early performance results from the prototype Morello microarchitecture</a></h1>
 <ul>
 <li>Robert N. M. Watson (University of Cambridge),</li>
 <li>Jessica Clarke (University of Cambridge),</li>
@@ -184,14 +189,14 @@ Please see our
 for source code and an issue tracker.
 There is a <a href="https://ctsrd-cheri.github.io/morello-early-performance-results/">rendered version on the web</a>,
 which is automatically updated when the git repository is committed to.</em></p>
-<h2><a class="header" href="#acknowledgements" id="acknowledgements">Acknowledgements</a></h2>
+<h2 id="acknowledgements"><a class="header" href="#acknowledgements">Acknowledgements</a></h2>
 <p>This work was supported by Innovate UK project &quot;Digital Security by Design
 (DSbD) Technology Platform Prototype&quot;, 105694.
 We gratefully acknowledge UK Research and Innovation (UKRI), who sponsored the
 creation of Morello, and also the significant investment by DARPA in
 supporting the creation of CHERI and its earlier prototypes.
 We also acknowledge Arm Limited and Google, Inc.</p>
-<h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p>Arm’s Morello<sup class="footnote-reference"><a href="#1">1</a></sup> is a first-generation, CHERI-enabled prototype CPU based on
 Arm’s Neoverse N1, as found in the N1SDP evaluation board.
 CHERI<sup class="footnote-reference"><a href="#2">2</a></sup> is an architectural feature that promises to dramatically improve
@@ -247,7 +252,7 @@ Vol 42.3, 2023.</p>
 <p>Watson, et al. <a href="https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-941.pdf">An Introduction to
 CHERI</a>.</p>
 </div>
-<h1><a class="header" href="#headline-results" id="headline-results">Headline results</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="headline-results"><a class="header" href="#headline-results">Headline results</a></h1>
 <p>In this section, we summarise high-level Morelle programme results with
 respect to <a href="headline-results/architectural-integration.html">architectural integration</a>,
 <a href="headline-results/software-ecosystem-enablement.html">software ecosystem enablement</a>,
@@ -257,7 +262,7 @@ respect to <a href="headline-results/architectural-integration.html">architectur
 analysis results can be found in later sections <a href="headline-results/../performance-methodology/">Performance
 methodology</a> and <a href="headline-results/../performance-analysis-spec/">Performance analysis of SPECint
 2006)</a>.</p>
-<h1><a class="header" href="#architectural-integration" id="architectural-integration">Architectural integration</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="architectural-integration"><a class="header" href="#architectural-integration">Architectural integration</a></h1>
 <p>A key aim for the Morello Programme was to establish an integration of the
 CHERI protection model with the baseline Armv8.2-A architecture that was
 sympathetic to the instruction-set philosophy and its goals.
@@ -287,12 +292,12 @@ Instruction-Set Architecture (Version
 8)</a>.</p>
 </div>
 <div class="footnote-definition" id="3"><sup class="footnote-definition-label">3</sup>
-<p>Bauereiss et al., <a href="http://www.cl.cam.ac.uk/%7Epes20/morello-proofs-esop2022.pdf">Verified Security for the Morello Capability-enhanced
+<p>Bauereiss et al., <a href="http://www.cl.cam.ac.uk/~pes20/morello-proofs-esop2022.pdf">Verified Security for the Morello Capability-enhanced
 Prototype Arm
 Architecture</a>,
 ESOP 2022</p>
 </div>
-<h1><a class="header" href="#software-ecosystem-enablement" id="software-ecosystem-enablement">Software ecosystem enablement</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="software-ecosystem-enablement"><a class="header" href="#software-ecosystem-enablement">Software ecosystem enablement</a></h1>
 <p>The primary aim of the Morello Programme has been to enable creation of, and
 experimentation with, a large CHERI-enabled software ecosystem.
 Prior to Morello, research implementations of CHERI were entirely on FPGA
@@ -320,7 +325,7 @@ proprietary code to the platform.</p>
 workstation, industrial control, and automotive workloads running under memory
 safety, and also early work on fine-grained software compartmentalisation as
 research prototypes mature.</p>
-<h1><a class="header" href="#microarchitectural-objectives" id="microarchitectural-objectives">Microarchitectural objectives</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="microarchitectural-objectives"><a class="header" href="#microarchitectural-objectives">Microarchitectural objectives</a></h1>
 <p>A further central experimental goal of the Morello Programme has been to
 establish the viability of CHERI-enabled microarchitecture when composed with
 contemporary high-performance processor design.
@@ -339,7 +344,7 @@ Important microarchitectural concerns included the potential effects of
 capability compression, bounds checking, and DDC/PCC control of memory
 accesses on the critical path for the cores themselves.
 All timing objectives for these paths were achieved.</p>
-<h1><a class="header" href="#dynamic-performance" id="dynamic-performance">Dynamic performance</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="dynamic-performance"><a class="header" href="#dynamic-performance">Dynamic performance</a></h1>
 <p>A rich understanding of the dynamic performance effects of CHERI was also an
 important aim of the work, but unlike the former goals, this goal was
 necessarily constrained by the limited one-year development timeline imposed
@@ -391,7 +396,7 @@ optimized potential future implementations.</p>
 methodology</a> and <a href="headline-results/../performance-analysis-spec/">Performance analysis of SPECint
 2006</a> for significant greater detail on our
 approach and results presented in the remainder of this section.</p>
-<h1><a class="header" href="#essential-overheads" id="essential-overheads">Essential overheads</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="essential-overheads"><a class="header" href="#essential-overheads">Essential overheads</a></h1>
 <p>A key question in the CHERI research since inception has been what the
 essential performance overheads are — i.e., those that are innate to the
 CHERI protection model — as opposed to the design choices of a specific
@@ -419,7 +424,7 @@ maturity (e.g., unoptimized ABI and compiler toolchain — for example,
 being unable to optimize certain global accesses that could occur directly via
 PCC rather than via the GOT) also limit accuracy on our projections.
 These are explored in greater detail in the remainder of this report.</p>
-<h1><a class="header" href="#initial-measured-performance-results-on-morello-and-abi-variations" id="initial-measured-performance-results-on-morello-and-abi-variations">Initial measured performance results on Morello and ABI variations</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="initial-measured-performance-results-on-morello-and-abi-variations"><a class="header" href="#initial-measured-performance-results-on-morello-and-abi-variations">Initial measured performance results on Morello and ABI variations</a></h1>
 <p>In this section, we present high-level performance results running SPECint
 2006, an industry-standard benchmark suite, on both unmodified and modified
 Morello microarchitectures, comparing several code-generation models allowing
@@ -433,14 +438,14 @@ of this work (including the specific SPECint subset used, compilation choices,
 implications of using the ‘train’ workload, and why), may be found in Section
 <a href="headline-results/../performance-methodology/index.html#performance-methodology">3</a>.</p>
 <p><img src="headline-results/specint-overhead-summary.svg" alt="Chart: Mean SPECint overheads for memory-safey code on Morello (FPGA)" /></p>
-<h2><a class="header" href="#result-on-unmodified-morello-microarchitecture-on-fpga" id="result-on-unmodified-morello-microarchitecture-on-fpga">Result on unmodified Morello microarchitecture on FPGA</a></h2>
+<h2 id="result-on-unmodified-morello-microarchitecture-on-fpga"><a class="header" href="#result-on-unmodified-morello-microarchitecture-on-fpga">Result on unmodified Morello microarchitecture on FPGA</a></h2>
 <p>Using an unmodified FPGA implementation of Morello (i.e., based on RTL used
 for first-generation Morello hardware), and employing software adaptations in
 the Benchmark ABI that compensate for Morello limitations such as those
 relating to capability-enabled branch prediction, we were able to achieve a
 <strong>14.97% geometric mean overhead across the training workload of the SPECint
 2006 benchmark suite with &quot;pure capability&quot; (memory-safe) code generation</strong>.</p>
-<h2><a class="header" href="#result-on-improved-morello-microarchitecture-on-fpga" id="result-on-improved-morello-microarchitecture-on-fpga">Result on improved Morello microarchitecture on FPGA</a></h2>
+<h2 id="result-on-improved-morello-microarchitecture-on-fpga"><a class="header" href="#result-on-improved-morello-microarchitecture-on-fpga">Result on improved Morello microarchitecture on FPGA</a></h2>
 <p>Using a modified FPGA implementation of Morello developed after chip tapeout,
 to work around a costly microarchitectural data-dependent exception check,
 which had been highlighted by performance counter results from dynamic
@@ -452,7 +457,7 @@ Analysis of the exception delivery issue suggests that more recent
 required to enable this optimization such that this roughly 51% of the
 overhead seen on the original Morello design (i.e., without the
 data-dependency fix) could be decreased or eliminated.</p>
-<h2><a class="header" href="#modeled-result-using-p128-on-improved-morello-microarchitecture-on-fpga" id="modeled-result-using-p128-on-improved-morello-microarchitecture-on-fpga">Modeled result using P128 on improved Morello microarchitecture on FPGA</a></h2>
+<h2 id="modeled-result-using-p128-on-improved-morello-microarchitecture-on-fpga"><a class="header" href="#modeled-result-using-p128-on-improved-morello-microarchitecture-on-fpga">Modeled result using P128 on improved Morello microarchitecture on FPGA</a></h2>
 <p>To model future microarchitectural improvements, we utilized modified aarch64
 (P128) code generation emulating capability memory overheads by widening
 pointer memory footprint — the essential cost to the CHERI extensions
@@ -468,11 +473,11 @@ effects arising from a lack of optimization in the Morello implementation,
 such as store-queue limits, instruction scheduling limitations, and other
 related factors, which we continue to investigate using modified Morello
 designs.</p>
-<h2><a class="header" href="#conclusion-from-initial-measurements" id="conclusion-from-initial-measurements">Conclusion from initial measurements</a></h2>
+<h2 id="conclusion-from-initial-measurements"><a class="header" href="#conclusion-from-initial-measurements">Conclusion from initial measurements</a></h2>
 <p><strong>The above 2.2% to 3.4% is our current best estimate of the geometric mean
 overhead that would be incurred for a future optimized design (though further
 improvements beyond that may well be possible)</strong>.</p>
-<h2><a class="header" href="#next-steps" id="next-steps">Next steps</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="next-steps"><a class="header" href="#next-steps">Next steps</a></h2>
 <p>At the time of writing, we are continuing several projects to better
 understand and optimize Morello performance to converge, as much as possible,
 with essential CHERI performance:</p>
@@ -510,7 +515,7 @@ employed in this work in greater detail, both to explain our results and also
 enable others to apply it.
 Further details on the next steps above may be found at the end of the report
 in the Future Directions section.</p>
-<h1><a class="header" href="#performance-methodology" id="performance-methodology">Performance methodology</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="performance-methodology"><a class="header" href="#performance-methodology">Performance methodology</a></h1>
 <p>In the following section, we explore the following as understood at the time
 of writing:</p>
 <ul>
@@ -520,8 +525,8 @@ aarch64c, OSes, etc)</li>
 data-dependency fix used in our measurements</li>
 <li>Known limitations of the Morello software stack including ABIs and toolchain</li>
 </ul>
-<h1><a class="header" href="#baseline-and-comparison-framework" id="baseline-and-comparison-framework">Baseline and comparison framework</a></h1>
-<h2><a class="header" href="#hardware" id="hardware">Hardware</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="baseline-and-comparison-framework"><a class="header" href="#baseline-and-comparison-framework">Baseline and comparison framework</a></h1>
+<h2 id="hardware"><a class="header" href="#hardware">Hardware</a></h2>
 <p>Despite being based on the Neoverse N1 configured as found in the N1SDP,
 performance results gathered on Morello are not directly comparable.
 Most importantly, cache sizes and other aspects of the memory subsystem differ
@@ -538,7 +543,7 @@ microarchitectural issue with exception delivery (see below for details).</li>
 <p>In general, third parties will only have access to unmodified Morello SoCs.
 However, they should see similar results to those we describe for the baseline
 Morello design on FPGA.</p>
-<h2><a class="header" href="#software" id="software">Software</a></h2>
+<h2 id="software"><a class="header" href="#software">Software</a></h2>
 <p>In general, comparisons in this report seek to contrast the dynamic behavior
 of memory-unsafe code with memory-safe code on Morello.
 To understand the essential pointer-size costs of CHERI, we also introduce a
@@ -609,7 +614,7 @@ all presented results.</p>
 <p>Weidmann, <a href="https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-a-profile-architecture-developments-2021">Arm A-Profile Architecture Developments
 2021</a>.</p>
 </div>
-<h1><a class="header" href="#morello-microarchitectural-limitations" id="morello-microarchitectural-limitations">Morello microarchitectural limitations</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="morello-microarchitectural-limitations"><a class="header" href="#morello-microarchitectural-limitations">Morello microarchitectural limitations</a></h1>
 <p>The following microarchitecture limitations arose due to the constrained timeline of the Morello development process. All are believed resolvable with a full-length design and optimization cycle used with production hardware.</p>
 <ul>
 <li><strong>PCC branch-prediction</strong> This issue prevents proper speculation around
@@ -657,11 +662,11 @@ For example, we have not yet reviewed the full set of memory prefetchers to
 make sure they behave well with pure-capability code.
 We have ongoing investigations in a number of these areas (see below for
 examples).</p>
-<h1><a class="header" href="#abis-code-generation-and-compilation" id="abis-code-generation-and-compilation">ABIs, code generation, and compilation</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="abis-code-generation-and-compilation"><a class="header" href="#abis-code-generation-and-compilation">ABIs, code generation, and compilation</a></h1>
 <p>We now describe, in greater detail, the different compilation and
 code-generation targets used in our measurements beyond the standard hybrid
 aarch64 and pure-capability aarch64c targets.</p>
-<h2><a class="header" href="#benchmark-abi" id="benchmark-abi">Benchmark ABI</a></h2>
+<h2 id="benchmark-abi"><a class="header" href="#benchmark-abi">Benchmark ABI</a></h2>
 <p>As described above, the Morello branch-predictor was not expanded to predict
 bounds.
 As a result, a capability jump register will stall later PCC-dependent
@@ -705,7 +710,7 @@ facilitate performance analysis and modeling.</p>
 extensions would introduce micro-architectural enhancements to address the
 performance limitations; therefore the Benchmark ABI is a temporary measure to
 facilitate comparisons using the Morello prototype.</p>
-<h2><a class="header" href="#p128-and-p128-forced-got-compilation" id="p128-and-p128-forced-got-compilation">P128 and P128 Forced-GOT compilation</a></h2>
+<h2 id="p128-and-p128-forced-got-compilation"><a class="header" href="#p128-and-p128-forced-got-compilation">P128 and P128 Forced-GOT compilation</a></h2>
 <p>The intention of these code-generation modes is to enable performance
 measurements for the essential overheads of pure-capability code, under the
 assumption that pointer-size growth is the primary essential overhead to
@@ -730,14 +735,14 @@ And, similarly, support for P128 currently consists of patches not intended to
 be supported outside of the Cambridge/Arm research environment; we are working
 to improve the quality of this implementation to make it suitable for
 third-party use.</p>
-<h1><a class="header" href="#performance-analysis-of-specint-2006" id="performance-analysis-of-specint-2006">Performance analysis of SPECint 2006</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="performance-analysis-of-specint-2006"><a class="header" href="#performance-analysis-of-specint-2006">Performance analysis of SPECint 2006</a></h1>
 <p>In this work, we analyze the behavior of the SPECint benchmarks that compile
 and run without modification for the CheriBSD pure-capability CheriABI process
 environment.
 All benchmarks are executed on an FPGA-based Morello implementation using
 identical core counts, cache configurations, and microarchitecturally
 identical to that in Morello except as otherwise noted.</p>
-<h1><a class="header" href="#specint-2006-benchmark-suite" id="specint-2006-benchmark-suite">SPECint 2006 benchmark suite</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="specint-2006-benchmark-suite"><a class="header" href="#specint-2006-benchmark-suite">SPECint 2006 benchmark suite</a></h1>
 <p>SPECint 2006 is an industry-standard benchmark suite consisting of a series of
 individual benchmarks representing integer-centric workloads such as code
 compilation, data compression, protein sequence analysis, and XML processing.
@@ -750,7 +755,7 @@ to complete.
 Due to reproducibility requirements on published SPECint results, we omit
 SPECint results requiring source-code modifications from this study.
 Results from the following benchmarks are included:</p>
-<table><thead><tr><th>Benchmark</th><th>Description</th><th>Status</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>Benchmark</th><th>Description</th><th>Status</th></tr></thead><tbody>
 <tr><td>401.bzip2</td><td>Data compression</td><td>Compiled as CHERI C/C++</td></tr>
 <tr><td>445.gobmk</td><td>Game of Go with AI participants</td><td>Compiled as CHERI C/C++</td></tr>
 <tr><td>456.hmmer</td><td>Protein sequence analysis</td><td>Compiled as CHERI C/C++</td></tr>
@@ -759,29 +764,31 @@ Results from the following benchmarks are included:</p>
 <tr><td>473.astar</td><td>Path-finding algorithms</td><td>Compiled as CHERI C/C++</td></tr>
 <tr><td>483.xalancbmk</td><td>XML document translation</td><td>Compiled as CHERI C/C++</td></tr>
 </tbody></table>
+</div>
 <p>The following benchmarks were not used either due to complex but incomplete
 adaptations to CHERI C/C++ preventing them from running (e.g., due to having
 only adapted more recent versions of gcc and perl), due to requiring
 unofficial patches that prevent us from distributing results, or due to known
 but as-yet unresolved compiler issues affecting comparability:</p>
-<table><thead><tr><th>Benchmark</th><th>Description</th><th>Status</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>Benchmark</th><th>Description</th><th>Status</th></tr></thead><tbody>
 <tr><td>400.perlbench</td><td>Various Perl language workloads</td><td>Old version of perl not adapted to CHERI C/C++</td></tr>
 <tr><td>403.gcc</td><td>C compiler workload</td><td>Old version of gcc not adapted to CHERI C/C++</td></tr>
 <tr><td>429.mcf</td><td>Vehicle scheduling</td><td>CHERI C/C++ adaptations fixing undefined behavior relating to realloc() are unofficial, and further changes to mitigate additional CHERI-induced padding due to pointer alignment mean that results are less comparable to stock SPECint 2006.</td></tr>
 <tr><td>462.libquantum</td><td>Quantum computer simulation</td><td>Benchmark runs 30% faster than the aarch64 version since 128-bit pointers inhibit vectorization in a case where vectorization is that turns out to not be harmful on the N1SDP microarchitecture.</td></tr>
 </tbody></table>
+</div>
 <p>All benchmark binaries are compiled at -O3, and are statically linked.</p>
-<h1><a class="header" href="#specific-hardware-and-software-configurations" id="specific-hardware-and-software-configurations">Specific hardware and software configurations</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="specific-hardware-and-software-configurations"><a class="header" href="#specific-hardware-and-software-configurations">Specific hardware and software configurations</a></h1>
 <p>The following software and hardware configurations were used in these
 benchmarks.
 Specific hardware configurations employ a microarchitectural change
 eliminating a data-dependent exception issue as noted above.</p>
-<h2><a class="header" href="#hybrid-aarch64-baseline-abi" id="hybrid-aarch64-baseline-abi">Hybrid (aarch64) baseline ABI</a></h2>
+<h2 id="hybrid-aarch64-baseline-abi"><a class="header" href="#hybrid-aarch64-baseline-abi">Hybrid (aarch64) baseline ABI</a></h2>
 <p>This configuration is the baseline for overhead calculations where no
 microarchitectural changes are used.
 It reflects the performance of legacy aarch64 (64-bit) code on Morello without
 fixes to the data-dependent exception issue.</p>
-<h2><a class="header" href="#purecap-abi-wo-data-dependency-fix" id="purecap-abi-wo-data-dependency-fix">Purecap ABI (w/o data-dependency fix)</a></h2>
+<h2 id="purecap-abi-wo-data-dependency-fix"><a class="header" href="#purecap-abi-wo-data-dependency-fix">Purecap ABI (w/o data-dependency fix)</a></h2>
 <p>This configuration presents worst-case performance for the shipping Morello
 design, as it contains no improvements to the microarchitecture relative to
 the taped-out implementation, and also no software adaptations for limitations
@@ -795,7 +802,7 @@ and bounds.
 This configuration is known to trigger the PCC branch-prediction issue during
 calls into short functions, function returns, and jump tables — a change
 that is now also used in baseline pure-capability code generation.</p>
-<h2><a class="header" href="#benchmark-abi-wo-data-dependency-fix" id="benchmark-abi-wo-data-dependency-fix">Benchmark ABI (w/o data-dependency fix)</a></h2>
+<h2 id="benchmark-abi-wo-data-dependency-fix"><a class="header" href="#benchmark-abi-wo-data-dependency-fix">Benchmark ABI (w/o data-dependency fix)</a></h2>
 <p>This configuration is based on the purecap configuration, but with a shift to
 the &quot;Benchmark ABI&quot;, which modifies default bounds on code pointers to be
 global.
@@ -805,14 +812,14 @@ new PCC bounds as described in <a href="performance-analysis-spec/../performance
 limitations</a>.
 This workaround should especially recover non-essential overhead associated
 with jump tables and calls into short functions.</p>
-<h2><a class="header" href="#benchmark-abi-w-data-dependency-fix" id="benchmark-abi-w-data-dependency-fix">Benchmark ABI (w/ data-dependency fix)</a></h2>
+<h2 id="benchmark-abi-w-data-dependency-fix"><a class="header" href="#benchmark-abi-w-data-dependency-fix">Benchmark ABI (w/ data-dependency fix)</a></h2>
 <p>This configuration is based on the Benchmark ABI configuration, only run with
 a modified microarchitecture that addresses the data-dependent exception issue
 described in <a href="performance-analysis-spec/../performance-methodology/morello-microarchitectural-limitations.html">Morello microarchitectural
 limitations</a>.
 The data-dependency fix avoids undesirable (and likely unnecessary in more
 recent baseline microarchitectures) stalls on capability stores.</p>
-<h2><a class="header" href="#p128-forced-got-w-data-dependency-fix" id="p128-forced-got-w-data-dependency-fix">P128 Forced GOT (w/ data-dependency fix)</a></h2>
+<h2 id="p128-forced-got-w-data-dependency-fix"><a class="header" href="#p128-forced-got-w-data-dependency-fix">P128 Forced GOT (w/ data-dependency fix)</a></h2>
 <p>This configuration is based on the P128 compilation mode, which widens
 language-level pointers to capability width (128 bits) to emulate the
 essential overhead of pointer-size growth without exercising capability
@@ -833,7 +840,7 @@ With respect to the stack, storage for language-level pointers is widened, but
 only 64-bit values are loaded and stored.
 For implied register saves and restores, storage is not widened.
 GOT entries, including those used for the PLT, remain 64 bit.</p>
-<h2><a class="header" href="#p128-w-data-dependency-fix" id="p128-w-data-dependency-fix">P128 (w/ data-dependency fix)</a></h2>
+<h2 id="p128-w-data-dependency-fix"><a class="header" href="#p128-w-data-dependency-fix">P128 (w/ data-dependency fix)</a></h2>
 <p>This configuration is identical to the P128 Forced-GOT configuration except
 that access to globals is sometimes performed via PCC, bypas
 ing GOT entries in configurations where aarch64 would offer the same choice
@@ -848,7 +855,7 @@ overhead of an optimized CHERI implementation against the Morello baseline
 (Neoverse N1) microarchitecture with elimination of the data-dependent
 exception issue; as above, the microarchitectural change should not affect
 this workload.</p>
-<h1><a class="header" href="#initial-results" id="initial-results">Initial results</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="initial-results"><a class="header" href="#initial-results">Initial results</a></h1>
 <p>Using the baseline pure-capability code generation combined with an unmodified
 microarchitecture yields 28.01% geometric mean overhead for the training
 workload of SPECint 2006.</p>
@@ -873,7 +880,7 @@ overhead for deterministic spatial and referential memory safety is achievable
 with an optimized instruction-set architecture on a performance-optimized
 microarchitecture.</p>
 <p><img src="performance-analysis-spec/specint-detailed-results.svg" alt="Chart: SPECint performance overheads across ABIs and hardware implementation variations (all measured on FPGA)" /></p>
-<h1><a class="header" href="#caveats" id="caveats">Caveats</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="caveats"><a class="header" href="#caveats">Caveats</a></h1>
 <p>We have presented early evaluation of the performance properties of the taped
 out Morello prototype and modified Morello designs running on FPGA.
 As a first-generation microarchitecture implementing CHERI support developed
@@ -915,7 +922,7 @@ becoming more prominent.
 We will seek to widen the set of benchmarks we use, as work proceeds, with
 particular interest in application-layer benchmarks such as those targeting
 JavaScript runtimes.</p>
-<h1><a class="header" href="#future-work" id="future-work">Future work</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="future-work"><a class="header" href="#future-work">Future work</a></h1>
 <p>Our effort to analyze and optimize performance, starting with the original
 taped-out Morello design, and now continuing on FPGA, remains at an early
 stage, with many next steps to take.
@@ -986,9 +993,7 @@ microarchitectures using measurements taken on the current microarchitecture.</p
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
 
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -996,49 +1001,35 @@ microarchitectures using measurements taken on the current microarchitecture.</p
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
 
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
 
-        
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
-        
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
-        
-        <script type="text/javascript">
+        <script>
         window.addEventListener('load', function() {
             window.setTimeout(window.print, 100);
         });
         </script>
-        
-        
 
+    </div>
     </body>
 </html>

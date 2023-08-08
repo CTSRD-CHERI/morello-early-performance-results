@@ -4,25 +4,16 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Initial measured performance results - Early performance results from the prototype Morello microarchitecture</title>
-        
-        
 
 
         <!-- Custom HTML head -->
         
-
-
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        
         <link rel="icon" href="../favicon.svg">
-        
-        
         <link rel="shortcut icon" href="../favicon.png">
-        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
@@ -30,9 +21,7 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="../fonts/fonts.css">
-        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -40,19 +29,18 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
 
-        
     </head>
     <body>
+    <div id="body-container">
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -68,7 +56,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -80,12 +68,14 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
-            var sidebar = 'hidden';
+            var sidebar = null;
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
@@ -98,12 +88,33 @@
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
@@ -112,17 +123,15 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
-                        
                     </div>
 
                     <h1 class="menu-title">Early performance results from the prototype Morello microarchitecture</h1>
@@ -131,18 +140,16 @@
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
                         <a href="https://github.com/CTSRD-CHERI/morello-early-performance-results" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+
                     </div>
                 </div>
 
-                
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -150,10 +157,9 @@
                         </ul>
                     </div>
                 </div>
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -163,7 +169,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#initial-measured-performance-results-on-morello-and-abi-variations" id="initial-measured-performance-results-on-morello-and-abi-variations">Initial measured performance results on Morello and ABI variations</a></h1>
+                        <h1 id="initial-measured-performance-results-on-morello-and-abi-variations"><a class="header" href="#initial-measured-performance-results-on-morello-and-abi-variations">Initial measured performance results on Morello and ABI variations</a></h1>
 <p>In this section, we present high-level performance results running SPECint
 2006, an industry-standard benchmark suite, on both unmodified and modified
 Morello microarchitectures, comparing several code-generation models allowing
@@ -177,14 +183,14 @@ of this work (including the specific SPECint subset used, compilation choices,
 implications of using the ‘train’ workload, and why), may be found in Section
 <a href="../performance-methodology/index.html#performance-methodology">3</a>.</p>
 <p><img src="specint-overhead-summary.svg" alt="Chart: Mean SPECint overheads for memory-safey code on Morello (FPGA)" /></p>
-<h2><a class="header" href="#result-on-unmodified-morello-microarchitecture-on-fpga" id="result-on-unmodified-morello-microarchitecture-on-fpga">Result on unmodified Morello microarchitecture on FPGA</a></h2>
+<h2 id="result-on-unmodified-morello-microarchitecture-on-fpga"><a class="header" href="#result-on-unmodified-morello-microarchitecture-on-fpga">Result on unmodified Morello microarchitecture on FPGA</a></h2>
 <p>Using an unmodified FPGA implementation of Morello (i.e., based on RTL used
 for first-generation Morello hardware), and employing software adaptations in
 the Benchmark ABI that compensate for Morello limitations such as those
 relating to capability-enabled branch prediction, we were able to achieve a
 <strong>14.97% geometric mean overhead across the training workload of the SPECint
 2006 benchmark suite with &quot;pure capability&quot; (memory-safe) code generation</strong>.</p>
-<h2><a class="header" href="#result-on-improved-morello-microarchitecture-on-fpga" id="result-on-improved-morello-microarchitecture-on-fpga">Result on improved Morello microarchitecture on FPGA</a></h2>
+<h2 id="result-on-improved-morello-microarchitecture-on-fpga"><a class="header" href="#result-on-improved-morello-microarchitecture-on-fpga">Result on improved Morello microarchitecture on FPGA</a></h2>
 <p>Using a modified FPGA implementation of Morello developed after chip tapeout,
 to work around a costly microarchitectural data-dependent exception check,
 which had been highlighted by performance counter results from dynamic
@@ -196,7 +202,7 @@ Analysis of the exception delivery issue suggests that more recent
 required to enable this optimization such that this roughly 51% of the
 overhead seen on the original Morello design (i.e., without the
 data-dependency fix) could be decreased or eliminated.</p>
-<h2><a class="header" href="#modeled-result-using-p128-on-improved-morello-microarchitecture-on-fpga" id="modeled-result-using-p128-on-improved-morello-microarchitecture-on-fpga">Modeled result using P128 on improved Morello microarchitecture on FPGA</a></h2>
+<h2 id="modeled-result-using-p128-on-improved-morello-microarchitecture-on-fpga"><a class="header" href="#modeled-result-using-p128-on-improved-morello-microarchitecture-on-fpga">Modeled result using P128 on improved Morello microarchitecture on FPGA</a></h2>
 <p>To model future microarchitectural improvements, we utilized modified aarch64
 (P128) code generation emulating capability memory overheads by widening
 pointer memory footprint — the essential cost to the CHERI extensions
@@ -212,7 +218,7 @@ effects arising from a lack of optimization in the Morello implementation,
 such as store-queue limits, instruction scheduling limitations, and other
 related factors, which we continue to investigate using modified Morello
 designs.</p>
-<h2><a class="header" href="#conclusion-from-initial-measurements" id="conclusion-from-initial-measurements">Conclusion from initial measurements</a></h2>
+<h2 id="conclusion-from-initial-measurements"><a class="header" href="#conclusion-from-initial-measurements">Conclusion from initial measurements</a></h2>
 <p><strong>The above 2.2% to 3.4% is our current best estimate of the geometric mean
 overhead that would be incurred for a future optimized design (though further
 improvements beyond that may well be possible)</strong>.</p>
@@ -221,17 +227,13 @@ improvements beyond that may well be possible)</strong>.</p>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="../headline-results/essential-overheads.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
 
-                        
                             <a rel="next" href="../headline-results/next-steps.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -239,49 +241,36 @@ improvements beyond that may well be possible)</strong>.</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="../headline-results/essential-overheads.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
 
-                
                     <a rel="next" href="../headline-results/next-steps.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
 
-        
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
-        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
-        
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
 
-        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
 
+    </div>
     </body>
 </html>
