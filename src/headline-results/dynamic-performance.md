@@ -18,18 +18,24 @@ A secondary aim was to enable the creation of software workloads suitable to
 drive future hardware optimisation, and to allow realistic projections of
 future performance &mdash; while not necessarily achieving optimal results in
 the current generation.
-The design-time constraints were: (1) limited existing CHERI-enabled workloads
-against which to tune the implementation during initial development; (2)
-limitations on changes to microarchitecture from the baseline N1SDP achievable
-in 12 months; and (3) classical Armv8.2-A elements of the microarchitecture
-have seen significantly more optimization than added CHERI extensions, meaning
-that care is required when performing side-by-side comparisons.
+The design-time constraints were:
+
+1. Limited existing CHERI-enabled workloads against which to tune the
+   implementation during initial development;
+
+2. Limitations on changes to microarchitecture from the baseline N1SDP
+   achievable in 12 months; and
+
+3. Classical Armv8.2-A elements of the microarchitecture have seen
+  significantly more optimization than added CHERI extensions, meaning that
+  care is required when performing side-by-side comparisons.
 
 **These limitations mean that run-time performance measurements observed on
 Morello should not be regarded as a good predictor of expected CHERI
 performance overheads when creating a production-quality, later-generation
 microarchitecture, at least without further analysis in the style of this
 report**.
+
 Microarchitectural research and development has, however, continued following
 tapeout.
 Essential to our analysis has been the creation of post-tapeout Morello
