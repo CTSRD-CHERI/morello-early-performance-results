@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Install cargo
         uses: actions-rs/toolchain@v1
@@ -19,7 +19,7 @@ jobs:
           profile: minimal
 
       - name: Install mdbook
-        run: curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.2/mdbook-v0.4.2-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=$HOME/.cargo/bin
+        run: curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.34/mdbook-v0.4.34-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=$HOME/.cargo/bin
 
       - name: Checkout source
         uses: actions/checkout@v2
@@ -36,7 +36,7 @@ jobs:
   draft-release:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v2
@@ -76,7 +76,7 @@ jobs:
   release:
     if: github.event_name == 'release' && github.event.action == 'created'
     needs: build
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v2
@@ -101,7 +101,7 @@ jobs:
   deploy:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v2
