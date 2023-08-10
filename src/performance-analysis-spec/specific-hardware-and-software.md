@@ -26,8 +26,7 @@ Further, all global accesses are via the GOT, to ensure every global is
 accessed through a dedicated capability carrying variable-specific permissions
 and bounds.
 This configuration is known to trigger the PCC branch-prediction issue during
-calls into short functions, function returns, and jump tables &mdash; a change
-that is now also used in baseline pure-capability code generation.
+calls into short functions, function returns, and jump tables.
 
 ## Benchmark ABI (w/o data-dependency fix) (w/o larger store queue)
 
@@ -39,7 +38,8 @@ avoiding triggering of stalls stemming from PCC-relative accesses depending on
 new PCC bounds as described in [Morello microarchitectural
 limitations](../performance-methodology/morello-microarchitectural-limitations.md).
 This workaround should especially recover non-essential overhead associated
-with jump tables and calls into short functions.
+with jump tables and calls into short functions &mdash; a change that is now
+also used in baseline pure-capability code generation.
 
 ## Benchmark ABI (w/ data-dependency fix) (w/o larger store queue)
 
