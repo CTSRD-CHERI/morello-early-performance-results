@@ -22,11 +22,12 @@ substantial tax on dynamic performance when capability protections are applied
 to control flow.
 
 To work around this behavior, we have developed a *Benchmark ABI*, which uses
-global bounds for the program counter capability (PCC) throughout execution.
-In-memory and in-register code capability values retain narrowed bounds (e.g.,
-those set up by the run-time linker), but code generation uses integer rather
-than capability jumps, retaining global bounds in PCC regardless of control
-flow.
+global bounds for the program counter capability (PCC) and any return
+capabilities throughout execution.
+All other n-memory and in-register code capability values retain narrowed
+bounds (e.g., those set up by the run-time linker), but code generation uses
+integer rather than capability jumps, retaining global bounds in PCC
+regardless of control flow.
 In effect, this ABI substantially reduces control-flow protections and
 encapsulation in return for more effective branch-prediction on the Morello
 microarchitecture, which is likely to be representative of more mature future
