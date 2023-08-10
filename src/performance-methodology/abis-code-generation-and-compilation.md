@@ -24,7 +24,7 @@ to control flow.
 To work around this behavior, we have developed a *Benchmark ABI*, which uses
 global bounds for the program counter capability (PCC) and any return
 capabilities throughout execution.
-All other n-memory and in-register code capability values retain narrowed
+All other in-memory and in-register code capability values retain narrowed
 bounds (e.g., those set up by the run-time linker), but code generation uses
 integer rather than capability jumps, retaining global bounds in PCC
 regardless of control flow.
