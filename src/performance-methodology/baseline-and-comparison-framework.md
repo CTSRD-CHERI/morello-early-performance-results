@@ -20,6 +20,10 @@ In general, third parties will only have access to unmodified Morello SoCs.
 However, they should see similar results to those we describe for the baseline
 Morello design on FPGA.
 
+All Morello configurations operated at a fixed frequency during benchmarks,
+with execution time measured in clock cycles for the purposes of calculating
+overheads.
+
 ## Software
 
 In general, comparisons in this report seek to contrast the dynamic behavior
