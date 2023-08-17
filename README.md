@@ -20,6 +20,36 @@ for source code and an issue tracker.
 There is a [rendered version on the web](https://ctsrd-cheri.github.io/morello-early-performance-results/),
 which is automatically updated when the git repository is committed to.*
 
+## Citation
+
+Please cite this report as:
+
+Robert N. M. Watson, Jessica Clarke, Peter Sewell, Jonathan Woodruff,
+Simon W. Moore, Graeme Barnes, Richard Grisenthwaite, Kathryn Stacer,
+Silviu Baranga, and Alexander Richardson.  **Early performance results
+from the prototype Morello microarchitecture**.  Technical Report
+UCAM-CL-TR-986, University of Cambridge, Computer Laboratory, 30 September
+2023.
+
+Or in BibTeX:
+
+```
+@TechReport{UCAM-CL-TR-986,
+  author =       {Watson, Robert N. M. and Clarke, Jessica and Sewell, Peter
+                  and Woodruff, Jonathan and Moore, Simon W. and Barnes,
+                  Graeme and Grisenthwaite, Richard and Stacer, Kathryn and
+                  Baranga, Silviu and Richardson, Alexander},
+  title =        {{Early performance results from the prototype Morello
+                  microarchitecture}},
+  institution =  {University of Cambridge, Computer Laboratory},
+  address =      {15 JJ Thomson Avenue, Cambridge CB3 0FD, United Kingdom,
+                  phone +44 1223 763500},
+  month =        {September},
+  year =         {2023},
+  number =       {UCAM-CL-TR-986}
+}
+```
+
 ## Acknowledgements
 
 This work was supported by Innovate UK project "Digital Security by Design
