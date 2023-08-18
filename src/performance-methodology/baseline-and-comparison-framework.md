@@ -20,6 +20,10 @@ In general, third parties will only have access to unmodified Morello SoCs.
 However, they should see similar results to those we describe for the baseline
 Morello design on FPGA.
 
+All Morello configurations operated at a fixed frequency during
+benchmarks[^1], with execution time measured in clock cycles for the purposes
+of calculating overheads.
+
 ## Software
 
 In general, comparisons in this report seek to contrast the dynamic behavior
@@ -75,7 +79,7 @@ limitation that hybrid code might be able to achieve better performance if it
 used highly optimized copying routines not yet available for CHERI-generated
 code.
 Another consideration is that the baseline Armv8.2-a architecture underlying
-Morello predates dedicated memory-copy instructions[^1].
+Morello predates dedicated memory-copy instructions[^2].
 If these new instructions were suitably adapted to handle CHERI alignment, tag
 propagation, and bounds enforcement, they would enable comparable
 hardware-based optimization for capability-enabled memory copying.
@@ -93,5 +97,8 @@ all presented results.
 
 By default, CheriBSD 22.12 ships with unoptimized third-party libraries (compiled with -O0), to improve debugging in the initial release, and those would not be suitable for benchmarking; we intend to provide packages built with optimizations enabled in the future. SPECint does not have external software dependencies beyond the system library, and so our work is not affected. If we were dependent on third-party packages, as might be true of other benchmark suites, we would need to investigate optimization settings for those packages. 
 
-[^1]: Weidmann, [Arm A-Profile Architecture Developments
+[^1]: The FPGA setup used in these measurements does not implement thermal
+throttling.
+
+[^2]: Weidmann, [Arm A-Profile Architecture Developments
 2021](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-a-profile-architecture-developments-2021).
