@@ -177,6 +177,9 @@ us to analyze the performance of memory-safe CHERI pure-capability code.
 All measurements were made on a consistently configured FPGA platform that
 offers strong performance fidelity, and used the 'train' rather than 'ref'
 workload due to on-FPGA execution times.
+All Morello configurations operated at a fixed frequency during
+benchmarks<sup class="footnote-reference"><a href="#1">1</a></sup>, with execution time measured in clock cycles for the purposes
+of calculating overheads.
 More detailed hardware, toolchain, and software compilation and configuration
 information, further results from additional configurations, and limitations
 of this work (including the specific SPECint subset used, compilation choices,
@@ -222,6 +225,10 @@ designs.</p>
 <p><strong>The above 2.2% to 3.4% is our current best estimate of the geometric mean
 overhead that would be incurred for a future optimized design (though further
 improvements beyond that may well be possible)</strong>.</p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>The FPGA setup used in these measurements does not implement thermal
+throttling.</p>
+</div>
 
                     </main>
 
