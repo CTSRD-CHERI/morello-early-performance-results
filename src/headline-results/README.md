@@ -1,6 +1,6 @@
 # Headline results
 
-In this section, we summarise high-level Morelle programme results with
+In this section, we summarise high-level Morello programme results with
 respect to [architectural integration](architectural-integration.html),
 [software ecosystem enablement](software-ecosystem-enablement.html),
 [microarchitectural objectives](microarchitectural-objectives.html), and
