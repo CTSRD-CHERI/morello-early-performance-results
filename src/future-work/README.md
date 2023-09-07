@@ -45,13 +45,9 @@ a global, or arbitrary array accesses occur.
 It may be possible to safely restore use of read-only PC-relative access in
 many cases, avoiding this indirection.
 
-* Continuing improvements to the enhanced on-FPGA Morello implementation.
-In the next stage of our work, we will be investigating (and retuning)
-microarchitectural data structures that were left unchanged from the Neoverse
-N1 design.
-Of particular interest are store queue sizes, which track in-flight stores,
-and which are seeing higher congestion as a result of larger capability
-store-pair memory accesses.
+* Continuing improvements to the enhanced on-FPGA Morello implementation, such
+as investigating (and adjusting) additional microarchitectural data structures
+that were left unchanged from the Neoverse N1 design.
 
 * Develop and publicize a model based on performance counters for estimating
 performance overhead contributions from various essential and non-essential

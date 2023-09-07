@@ -7,12 +7,12 @@ eliminating a data-dependent exception issue as noted above.
 
 ## Hybrid (aarch64) baseline ABI
 
-This configuration is the baseline for overhead calculations where no
-microarchitectural changes are used.
-It reflects the performance of legacy aarch64 (64-bit) code on Morello without
-fixes to the data-dependent exception issue.
+This configuration is the baseline for overhead calculations.
+It reflects the performance of legacy aarch64 (64-bit) code on Morello.
+Each ABI below is compared against this configuration run on the corresponding
+Morello design.
 
-## Purecap ABI (w/o data-dependency fix)
+## Purecap ABI (w/o data-dependency fix) (w/o larger store queue)
 
 This configuration presents worst-case performance for the shipping Morello
 design, as it contains no improvements to the microarchitecture relative to
@@ -28,7 +28,7 @@ This configuration is known to trigger the PCC branch-prediction issue during
 calls into short functions, function returns, and jump tables &mdash; a change
 that is now also used in baseline pure-capability code generation.
 
-## Benchmark ABI (w/o data-dependency fix)
+## Benchmark ABI (w/o data-dependency fix) (w/o larger store queue)
 
 This configuration is based on the purecap configuration, but with a shift to
 the "Benchmark ABI", which modifies default bounds on code pointers to be
@@ -40,7 +40,7 @@ limitations](../performance-methodology/morello-microarchitectural-limitations.m
 This workaround should especially recover non-essential overhead associated
 with jump tables and calls into short functions.
 
-## Benchmark ABI (w/ data-dependency fix)
+## Benchmark ABI (w/ data-dependency fix) (w/o larger store queue)
 
 This configuration is based on the Benchmark ABI configuration, only run with
 a modified microarchitecture that addresses the data-dependent exception issue
@@ -49,7 +49,15 @@ limitations](../performance-methodology/morello-microarchitectural-limitations.m
 The data-dependency fix avoids undesirable (and likely unnecessary in more
 recent baseline microarchitectures) stalls on capability stores.
 
-## P128 Forced GOT (w/ data-dependency fix)
+## Benchmark ABI (w/ data-dependency fix) (w/ larger store queue)
+
+This configuration is based on the Benchmark ABI configuration, run with a
+further modified microarchitecture that also expands the store queue size to
+address the queue pressure issue described in [Morello microarchitectural
+limitations](../performance-methodology/morello-microarchitectural-limitations.md),
+on top of addressing the data-dependent exception issue.
+
+## P128 Forced GOT (w/ data-dependency fix) (w/ larger store queue)
 
 This configuration is based on the P128 compilation mode, which widens
 language-level pointers to capability width (128 bits) to emulate the
@@ -65,15 +73,16 @@ corresponds to purecap global access.
 We treat this configuration as the **upper bound** for estimated performance
 overhead of an optimized CHERI implementation against the Morello baseline
 (Neoverse N1) microarchitecture with elimination of the data-dependent
-exception issue; the microarchitectural change should not, however, affect
-this workload.
+exception issue and alleviating the store queue pressure issue.
+The data-dependence microarchitectural change should not, however, affect this
+workload.
 There are important limitations to the current fidelity of this work.
 With respect to the stack, storage for language-level pointers is widened, but
 only 64-bit values are loaded and stored.
 For implied register saves and restores, storage is not widened.
 GOT entries, including those used for the PLT, remain 64 bit.
 
-## P128 (w/ data-dependency fix)
+## P128 (w/ data-dependency fix) (w/ larger store queue)
 
 This configuration is identical to the P128 Forced-GOT configuration except
 that access to globals is sometimes performed via PCC, bypas
