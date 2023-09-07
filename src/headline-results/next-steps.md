@@ -4,8 +4,8 @@ At the time of writing, we are continuing several projects to better
 understand and optimize Morello performance to converge, as much as possible,
 with essential CHERI performance:
 
-* Further tuning the Morello microarchitecture on FPGA, including tuning store
-  queues that were tuned for the pre-CHERI N1SDP design.
+* Continuing to explore the effects of load and store queues that were tuned
+  for the pre-CHERI N1SDP design.
   This problem has been highlighted in memory-store-intensive benchmarks that
   see greater congestion with rapid sequential capability-width stores.
   This issue in particular is believed to reduce the throughput of load- and

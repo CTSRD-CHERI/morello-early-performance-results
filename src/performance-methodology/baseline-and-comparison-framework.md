@@ -10,11 +10,15 @@ Instead, direct comparisons must be performed between multiple software
 configurations on Morello.
 
 In addition, measurements in this report are made on an FPGA-adapted
-implementation of Morello, with two variants used:
+implementation of Morello, with three variants used:
 
 * **Baseline Morello design** modeled on the shipped Morello SoC.
 * **Modified Morello design with data-dependent exception fix** correcting a
   microarchitectural issue with exception delivery (see below for details).
+* **Modified Morello design with data-dependent exception fix and increased
+  store queue size** expanding the store queue sizes to address increased queue
+  pressure due to the presence of capability stores, on top of the above
+  modified design.
 
 In general, third parties will only have access to unmodified Morello SoCs.
 However, they should see similar results to those we describe for the baseline

@@ -13,15 +13,15 @@ Applying a microarchitectural fix to the data-dependent exception issue, and
 measuring using the Benchmark ABI yields a 7.40% geometric mean overhead (a
 further 50.1% overhead reduction).
 
+Increasing the size of the store queues, and measuring using the Benchmark ABI
+yields a 5.70% geometric mean overhead (a futher 23.0% overhead reduction).
+
 Using the P128 Forced GOT and P128 compilation modes gives an upper bound
-estimated overhead of 3.4% and lower bound estimated overhead of 2.2%.
+estimated overhead of 3.0% and lower bound estimated overhead of 1.8%.
 
 Performance-counter data gathered during these experiments suggests that
 further non-essential architectural and microarchitectural overheads exist,
-including inefficient code generation around the MADD instruction and also
-congested store queues due to a lack of queue-size tuning.
-We have implemented but not yet measured prototype adaptations of the
-toolchain and microarchitecture to address these issues.
+including inefficient code generation around the MADD instruction.
 
 Assuming that the data-dependent exception issue is resolvable in at least one
 of software and hardware, it is reasonable to project that the goal of 2%-3%
