@@ -2,8 +2,9 @@
 
 The following software and hardware configurations were used in these
 benchmarks.
-Specific hardware configurations employ a microarchitectural change
-eliminating a data-dependent exception issue as noted above.
+Some hardware configurations employ one or both of microarchitectural changes
+to eliminate a data-dependent exception issue or adjust store-queue depths, as
+noted above.
 
 ## Hybrid (aarch64) baseline ABI
 
