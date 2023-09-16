@@ -27,7 +27,7 @@ accessed through a dedicated capability carrying variable-specific permissions
 and bounds.
 This configuration is known to trigger the PCC branch-prediction issue during
 calls into short functions and function returns.
-Jump tables are implemented integer jumps and so do not suffer from this
+Jump tables are implemented as integer jumps and so do not suffer from this
 issue, but would if they used capability-relative jumps.
 
 ## Benchmark ABI (w/o data-dependency fix) (w/o larger store queue)
