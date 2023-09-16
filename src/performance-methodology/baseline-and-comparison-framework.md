@@ -99,7 +99,7 @@ including its system libraries.
 The SPECint benchmark suite is compiled with -O3. SPEC is statically linked in
 all presented results.
 
-By default, CheriBSD 22.12 ships with unoptimized third-party libraries (compiled with -O0), to improve debugging in the initial release, and those would not be suitable for benchmarking; we intend to provide packages built with optimizations enabled in the future. SPECint does not have external software dependencies beyond the system library, and so our work is not affected. If we were dependent on third-party packages, as might be true of other benchmark suites, we would need to investigate optimization settings for those packages. 
+By default, CheriBSD 22.12 ships with unoptimized third-party libraries (compiled with -O0), to improve debugging in the initial release, and those would not be suitable for benchmarking; we intend to provide packages built with optimizations enabled in the future. SPECint does not have external software dependencies beyond those in the CheriBSD base system (e.g., `libc`, `libunwind`, `libcxxrt`, `libm`, and `libgcc_s`), and so our work is not affected. If we were dependent on third-party packages, as might be true of other benchmark suites, we would need to investigate optimization settings for those packages.
 
 [^1]: The FPGA setup used in these measurements does not implement thermal
 throttling.

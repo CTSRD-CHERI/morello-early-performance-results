@@ -8,7 +8,7 @@ aarch64 and pure-capability aarch64c targets.
 
 As described above, the Morello branch-predictor was not expanded to predict
 bounds.
-As a result, a capability jump register will stall later PCC-dependent
+As a result, a capability-based jump will stall later PCC-dependent
 instructions until bounds are established.
 This is particularly problematic across dynamically linked calls (and returns)
 between libraries, which will change bounds to those covering the called (or
