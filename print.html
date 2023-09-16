@@ -655,7 +655,7 @@ Userlevel malloc debugging is disabled. CheriBSD is compiled with -O2,
 including its system libraries.</p>
 <p>The SPECint benchmark suite is compiled with -O3. SPEC is statically linked in
 all presented results.</p>
-<p>By default, CheriBSD 22.12 ships with unoptimized third-party libraries (compiled with -O0), to improve debugging in the initial release, and those would not be suitable for benchmarking; we intend to provide packages built with optimizations enabled in the future. SPECint does not have external software dependencies beyond the system library, and so our work is not affected. If we were dependent on third-party packages, as might be true of other benchmark suites, we would need to investigate optimization settings for those packages. </p>
+<p>By default, CheriBSD 22.12 ships with unoptimized third-party libraries (compiled with -O0), to improve debugging in the initial release, and those would not be suitable for benchmarking; we intend to provide packages built with optimizations enabled in the future. SPECint does not have external software dependencies beyond those in the CheriBSD base system (e.g., <code>libc</code>, <code>libunwind</code>, <code>libcxxrt</code>, <code>libm</code>, and <code>libgcc_s</code>), and so our work is not affected. If we were dependent on third-party packages, as might be true of other benchmark suites, we would need to investigate optimization settings for those packages.</p>
 <div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
 <p>The FPGA setup used in these measurements does not implement thermal
 throttling.</p>
@@ -719,7 +719,7 @@ aarch64 and pure-capability aarch64c targets.</p>
 <h2 id="benchmark-abi"><a class="header" href="#benchmark-abi">Benchmark ABI</a></h2>
 <p>As described above, the Morello branch-predictor was not expanded to predict
 bounds.
-As a result, a capability jump register will stall later PCC-dependent
+As a result, a capability-based jump will stall later PCC-dependent
 instructions until bounds are established.
 This is particularly problematic across dynamically linked calls (and returns)
 between libraries, which will change bounds to those covering the called (or
@@ -900,8 +900,8 @@ For implied register saves and restores, storage is not widened.
 GOT entries, including those used for the PLT, remain 64 bit.</p>
 <h2 id="p128-w-data-dependency-fix-w-larger-store-queue"><a class="header" href="#p128-w-data-dependency-fix-w-larger-store-queue">P128 (w/ data-dependency fix) (w/ larger store queue)</a></h2>
 <p>This configuration is identical to the P128 Forced-GOT configuration except
-that access to globals is sometimes performed via PCC, bypas
-ing GOT entries in configurations where aarch64 would offer the same choice
+that access to globals is sometimes performed via PC, bypassing GOT entries
+in configurations where aarch64 would offer the same choice
 — e.g., when performing read-only accesses to globals within the current
 shared object.
 If this optimization were used with pure-capability code, it could lead to
@@ -918,7 +918,7 @@ this workload.</p>
 microarchitecture yields 28.01% geometric mean overhead for the training
 workload of SPECint 2006.</p>
 <p>Working around dependence on unpredicted PCC bounds when performing a
-capability jump register using the Benchmark ABI combined with an unmodified
+capability-based jump using the Benchmark ABI combined with an unmodified
 microarchitecture, this is reduced to 14.97% geometric mean overhead (a 46.6%
 reduction).</p>
 <p>Applying a microarchitectural fix to the data-dependent exception issue, and
