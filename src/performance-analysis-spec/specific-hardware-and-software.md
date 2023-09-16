@@ -85,7 +85,7 @@ GOT entries, including those used for the PLT, remain 64 bit.
 ## P128 (w/ data-dependency fix) (w/ larger store queue)
 
 This configuration is identical to the P128 Forced-GOT configuration except
-that access to globals is sometimes performed via PCC, bypassing GOT entries
+that access to globals is sometimes performed via PC, bypassing GOT entries
 in configurations where aarch64 would offer the same choice
 &mdash; e.g., when performing read-only accesses to globals within the current
 shared object.
