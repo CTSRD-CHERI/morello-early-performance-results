@@ -852,8 +852,9 @@ Further, all global accesses are via the GOT, to ensure every global is
 accessed through a dedicated capability carrying variable-specific permissions
 and bounds.
 This configuration is known to trigger the PCC branch-prediction issue during
-calls into short functions, function returns, and jump tables — a change
-that is now also used in baseline pure-capability code generation.</p>
+calls into short functions and function returns.
+Jump tables are implemented as integer jumps and so do not suffer from this
+issue, but would if they used capability-relative jumps.</p>
 <h2 id="benchmark-abi-wo-data-dependency-fix-wo-larger-store-queue"><a class="header" href="#benchmark-abi-wo-data-dependency-fix-wo-larger-store-queue">Benchmark ABI (w/o data-dependency fix) (w/o larger store queue)</a></h2>
 <p>This configuration is based on the purecap configuration, but with a shift to
 the &quot;Benchmark ABI&quot;, which modifies default bounds on code pointers to be
@@ -863,7 +864,7 @@ avoiding triggering of stalls stemming from PCC-relative accesses depending on
 new PCC bounds as described in <a href="performance-analysis-spec/../performance-methodology/morello-microarchitectural-limitations.html">Morello microarchitectural
 limitations</a>.
 This workaround should especially recover non-essential overhead associated
-with jump tables and calls into short functions.</p>
+with calls into short functions.</p>
 <h2 id="benchmark-abi-w-data-dependency-fix-wo-larger-store-queue"><a class="header" href="#benchmark-abi-w-data-dependency-fix-wo-larger-store-queue">Benchmark ABI (w/ data-dependency fix) (w/o larger store queue)</a></h2>
 <p>This configuration is based on the Benchmark ABI configuration, only run with
 a modified microarchitecture that addresses the data-dependent exception issue
