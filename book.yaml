@@ -14,3 +14,9 @@ pagestyle: headings
 numbersections: true
 secnumdepth: 3
 colorlinks: true
+fontfamily: times
+header-includes:
+- |
+  ```{=latex}
+  \usepackage[scaled=0.82]{beramono}
+  ```
