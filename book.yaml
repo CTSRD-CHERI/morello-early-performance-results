@@ -19,4 +19,39 @@ header-includes:
 - |
   ```{=latex}
   \usepackage[scaled=0.82]{beramono}
+  \usepackage{xparse}
+  ```
+include-before:
+- |
+  ```{=latex}
+  \thispagestyle{empty}
+
+  % Put a \cleardoublepage and TOC before the first numbered section, and stub
+  % out \addcontentsline until then to suppress the front matter's lines.
+  \let\oldsection\section
+  \let\oldaddcontentsline\addcontentsline
+  \RenewDocumentCommand{\section}{som}{%
+    \IfBooleanTF{#1}{%
+      \IfValueTF{#2}{%
+        \oldsection*[#2]{#3}%
+      }{%
+        \oldsection*{#3}%
+      }%
+    }{%
+      \let\addcontentsline\oldaddcontentsline%
+      \let\section\oldsection%
+      \cleardoublepage%
+      {%
+        \hypersetup{linkcolor=}%
+        \tableofcontents%
+      }%
+      \clearpage%
+      \IfValueTF{#2}{%
+        \section[#2]{#3}%
+      }{%
+        \section{#3}%
+      }%
+    }%
+  }
+  \renewcommand\addcontentsline[3]{}%
   ```
