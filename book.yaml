@@ -20,6 +20,7 @@ header-includes:
   ```{=latex}
   \usepackage[scaled=0.82]{beramono}
   \usepackage{xparse}
+  \usepackage{titlesec}
   ```
 include-before:
 - |
@@ -60,4 +61,10 @@ include-before:
   \let\old@makefntext\@makefntext
   \renewcommand\@makefntext[1]{\old@makefntext{ #1}}
   \makeatother
+
+  % Typeset \paragraph for H4 headings as a block rather than inline heading
+  % and number it
+  \setcounter{secnumdepth}{4}
+  \titleformat{\paragraph}{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+  \titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
   ```
