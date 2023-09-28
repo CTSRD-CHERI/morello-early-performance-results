@@ -27,7 +27,7 @@ jobs:
         run: wget 'https://github.com/jgm/pandoc/releases/download/2.19.2/pandoc-2.19.2-1-amd64.deb'
 
       - name: Install packages
-        run: sudo apt-get update && sudo apt-get install -y make ./pandoc-2.19.2-1-amd64.deb texlive-latex-extra librsvg2-bin
+        run: sudo apt-get update && sudo apt-get install -y make ./pandoc-2.19.2-1-amd64.deb texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra librsvg2-bin
 
       - name: Checkout source
         uses: actions/checkout@v2
