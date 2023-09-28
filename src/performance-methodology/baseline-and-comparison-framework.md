@@ -83,7 +83,9 @@ limitation that hybrid code might be able to achieve better performance if it
 used highly optimized copying routines not yet available for CHERI-generated
 code.
 Another consideration is that the baseline Armv8.2-a architecture underlying
-Morello predates dedicated memory-copy instructions[^2].
+Morello predates [dedicated memory-copy
+instructions](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-a-profile-architecture-developments-2021)
+[[WEI21]](../bibliography/#WEI21).
 If these new instructions were suitably adapted to handle CHERI alignment, tag
 propagation, and bounds enforcement, they would enable comparable
 hardware-based optimization for capability-enabled memory copying.
@@ -103,6 +105,3 @@ By default, CheriBSD 22.12 ships with unoptimized third-party libraries (compile
 
 [^1]: The FPGA setup used in these measurements does not implement thermal
 throttling.
-
-[^2]: Weidmann, [Arm A-Profile Architecture Developments
-2021](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-a-profile-architecture-developments-2021).

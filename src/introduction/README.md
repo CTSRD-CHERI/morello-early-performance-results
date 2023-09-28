@@ -1,10 +1,13 @@
 # Introduction
 
-Arm’s Morello[^1] is a first-generation, CHERI-enabled prototype CPU based on
-Arm’s Neoverse N1, as found in the N1SDP evaluation board.
-CHERI[^2] is an architectural feature that promises to dramatically improve
-software security through fine-grained memory protection and scalable
-compartmentalization.
+[Arm’s Morello](https://ieeexplore.ieee.org/document/10123148)
+[[GRI23]](../bibliography/#GRI23) is a first-generation, CHERI-enabled
+prototype CPU based on Arm’s Neoverse N1, as found in the N1SDP evaluation
+board.
+[CHERI](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-941.pdf)
+[[WAT19]](../bibliography/#WAT19) is an architectural feature that promises to
+dramatically improve software security through fine-grained memory protection
+and scalable compartmentalization.
 Supported by UKRI, Morello is a research platform to evaluate CHERI at an
 industrial scale through composition with a rich, contemporary,
 high-performance microarchitecture and full software stack at a scale
@@ -42,11 +45,3 @@ notes) as our on-going work with Morello proceeds.
 If you are performing performance experiments on the Morello platform and
 would like to reach out to us for discussion of experimental design, or
 guidance on interpreting results, please do not hesitate to contact us.
-
-[^1]: [The Arm Morello Evaluation Platform—Validating CHERI-Based Security in
-  a High-Performance System](https://ieeexplore.ieee.org/document/10123148)
-  [[GRI23]](../bibliography/#GRI23).
-
-[^2]: [An Introduction to
-  CHERI](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-941.pdf)
-  [[WAT19]](../bibliography/#WAT19).

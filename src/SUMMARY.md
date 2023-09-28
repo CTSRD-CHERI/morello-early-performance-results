@@ -22,3 +22,4 @@
 - [Future work](future-work/README.md)
 - [Acknowledgements](acknowledgements/README.md)
 - [Version history](version-history/README.md)
+- [Bibliography](bibliography/README.md)
