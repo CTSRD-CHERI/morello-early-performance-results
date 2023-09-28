@@ -20,4 +20,5 @@
   - [Initial results](performance-analysis-spec/initial-results.md)
 - [Caveats](caveats/README.md)
 - [Future work](future-work/README.md)
+- [Acknowledgements](acknowledgements/README.md)
 - [Version history](version-history/README.md)

@@ -50,7 +50,7 @@ Or in BibTeX:
 }
 ```
 
-## Acknowledgements
+## Sponsorship
 
 This work was supported by Innovate UK project "Digital Security by Design
 (DSbD) Technology Platform Prototype", 105694.
