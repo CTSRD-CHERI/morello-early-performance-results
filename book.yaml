@@ -54,4 +54,10 @@ include-before:
     }%
   }
   \renewcommand\addcontentsline[3]{}%
+
+  % Add spacing between footnote number and text
+  \makeatletter
+  \let\old@makefntext\@makefntext
+  \renewcommand\@makefntext[1]{\old@makefntext{ #1}}
+  \makeatother
   ```
