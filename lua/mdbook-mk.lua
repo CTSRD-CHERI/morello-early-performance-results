@@ -142,6 +142,7 @@ function Writer(doc, opts)
 		    " --id-prefix " .. filedir .. bookfilename .. "-" ..
 		    shiftheadingflag ..
 		    unnumberheadingflag ..
+		    " --lua-filter " .. lua .. "anchor-to-span.lua" ..
 		    " --lua-filter " .. lua .. "xref-fixup.lua" ..
 		    " --fail-if-warning -- $<\n"
 
