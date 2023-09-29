@@ -143,6 +143,8 @@ function Writer(doc, opts)
 		    shiftheadingflag ..
 		    unnumberheadingflag ..
 		    " --lua-filter " .. lua .. "anchor-to-span.lua" ..
+		    " -M mdbook.xref-fixup.filedir=" .. filedir ..
+		    " -M mdbook.xref-fixup.filename=" .. filename ..
 		    " --lua-filter " .. lua .. "xref-fixup.lua" ..
 		    " --fail-if-warning -- $<\n"
 
