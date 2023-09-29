@@ -14,7 +14,7 @@ More detailed hardware, toolchain, and software compilation and configuration
 information, further results from additional configurations, and limitations
 of this work (including the specific SPECint subset used, compilation choices,
 implications of using the ‘train’ workload, and why), may be found in Section
-[3](../performance-methodology/index.md#performance-methodology).
+[3](../performance-methodology/#performance-methodology).
 
 ![Chart: Mean SPECint overheads for memory-safey code on Morello
   (FPGA)](specint-overhead-summary.svg)

@@ -1,10 +1,10 @@
 # Headline results
 
 In this section, we summarise high-level Morello programme results with
-respect to [architectural integration](architectural-integration.html),
-[software ecosystem enablement](software-ecosystem-enablement.html),
-[microarchitectural objectives](microarchitectural-objectives.html), and
-[dynamic performance](dynamic-performance.html).
+respect to [architectural integration](architectural-integration.md),
+[software ecosystem enablement](software-ecosystem-enablement.md),
+[microarchitectural objectives](microarchitectural-objectives.md), and
+[dynamic performance](dynamic-performance.md).
 
 More detailed explorations of the performance framework and performance
 analysis results can be found in later sections [Performance
