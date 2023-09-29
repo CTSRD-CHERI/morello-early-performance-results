@@ -43,10 +43,10 @@ If you are performing performance experiments on the Morello platform and
 would like to reach out to us for discussion of experimental design, or
 guidance on interpreting results, please do not hesitate to contact us.
 
-[^1]:  Grisenthwaite, et al. [The Arm Morello Evaluation Platform—Validating
-  CHERI-Based Security in a High-Performance
-  System](https://ieeexplore.ieee.org/document/10123148), IEEE Micro Magazine
-  Vol 42.3, 2023.
+[^1]: [The Arm Morello Evaluation Platform—Validating CHERI-Based Security in
+  a High-Performance System](https://ieeexplore.ieee.org/document/10123148)
+  [[GRI23]](../bibliography/#GRI23).
 
-[^2]:  Watson, et al. [An Introduction to
-  CHERI](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-941.pdf).
+[^2]: [An Introduction to
+  CHERI](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-941.pdf)
+  [[WAT19]](../bibliography/#WAT19).
