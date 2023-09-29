@@ -43,13 +43,6 @@ If you are performing performance experiments on the Morello platform and
 would like to reach out to us for discussion of experimental design, or
 guidance on interpreting results, please do not hesitate to contact us.
 
-This work was supported by Innovate UK project "Digital Security by Design
-(DSbD) Technology Platform Prototype", 105694.
-We gratefully acknowledge UK Research and Innovation (UKRI), who sponsored the
-creation of Morello, and also the significant investment by DARPA in
-supporting the creation of CHERI and its earlier prototypes.
-We also acknowledge Arm Limited and Google, Inc.
-
 [^1]:  Grisenthwaite, et al. [The Arm Morello Evaluation Platform—Validating
   CHERI-Based Security in a High-Performance
   System](https://ieeexplore.ieee.org/document/10123148), IEEE Micro Magazine
