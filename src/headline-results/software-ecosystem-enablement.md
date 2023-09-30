@@ -19,8 +19,10 @@ This includes memory-safe FreeBSD kernel and userlevel, Linux BusyBox, Wayland
 window server and KDE Plasma desktop, and approaching ten thousand open-source
 software packages.
 At the time of writing, there is a significant in-progress effort to adapt the
-Chromium web browser and V8 JavaScript runtime to compile with memory-safe
-CHERI C/C++ languages. In addition to announced programme partners such as
+Chromium web browser and V8 JavaScript runtime to compile with [memory-safe
+CHERI C/C++
+languages](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-947.pdf) [[WAT20B]](../bibliography/#WAT20B).
+In addition to announced programme partners such as
 Google and Microsoft, dozens of companies supported by UKRI’s Technology
 Access Programme (TAP) have also adapted millions of lines of open-source and
 proprietary code to the platform.
