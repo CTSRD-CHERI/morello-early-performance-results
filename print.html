@@ -272,7 +272,7 @@ respect to <a href="headline-results/architectural-integration.html">architectur
 <p>More detailed explorations of the performance framework and performance
 analysis results can be found in later sections <a href="headline-results/../performance-methodology/">Performance
 methodology</a> and <a href="headline-results/../performance-analysis-spec/">Performance analysis of SPECint
-2006)</a>.</p>
+2006</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="architectural-integration"><a class="header" href="#architectural-integration">Architectural integration</a></h1>
 <p>A key aim for the Morello Programme was to establish an integration of the
 CHERI protection model with the baseline Armv8.2-A architecture that was
@@ -282,7 +282,7 @@ a deemphasis of architectural exceptions during register-to-register
 operations, the introduction of a “capability mode” that enables capability
 addressing for existing load and store instructions to conserve opcode space,
 and integrating CHERI with other contemporary architectural features such as
-hypervisor extensions that had not been present in earlier MIPS-based CHERI
+hypervisor extensions that were not present in earlier MIPS-based CHERI
 prototypes.</p>
 <p>These architectural extensions are described in detail in <a href="https://developer.arm.com/documentation/ddi0606/latest">Arm’s Morello
 architecture
@@ -334,7 +334,7 @@ establish the viability of CHERI-enabled microarchitecture when composed with
 contemporary high-performance processor design.
 The Morello SoC has 4 processor cores based on the Neoverse N1 processor, a
 Mali G76 GPU, and a modified memory controller.
-The modified N1 cores maintain the features in the Armv8.2 Neoverse N1 while
+The modified N1 cores maintain the features in the Armv8.2-A Neoverse N1 while
 adding the 129-bit CHERI capability protection model.
 Morello is backwards compatible with Armv8-A architecture systems in AArch64
 (AArch32 support was disabled for simplicity).</p>
@@ -595,7 +595,7 @@ See below for more information on this ABI.</li>
 footprints are widened to 128 bits from 64 bits, while still implemented as
 64-bit integers rather than capabilities.
 See below for more information on this compilation mode.</li>
-<li><strong>P128 Forced-GOT code</strong>, which, unlike P128, which allows access to global
+<li><strong>P128 Forced GOT code</strong>, which, unlike P128, which allows access to global
 variables via PC-derived pointers, forces the indirection of all global
 access via a Global Offset Table (GOT) to emulate the potential worst-case
 addition of capability indirection that could be experienced with
@@ -620,7 +620,7 @@ substantial dynamic performance analysis and optimization, but with the
 limitation that hybrid code might be able to achieve better performance if it
 used highly optimized copying routines not yet available for CHERI-generated
 code.
-Another consideration is that the baseline Armv8.2-a architecture underlying
+Another consideration is that the baseline Armv8.2-A architecture underlying
 Morello predates <a href="https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-a-profile-architecture-developments-2021">dedicated memory-copy
 instructions</a>
 <a href="performance-methodology/../bibliography/#WEI21">[WEI21]</a>.
@@ -630,7 +630,7 @@ hardware-based optimization for capability-enabled memory copying.</p>
 <p>For the purposes of these measurements, which focus on userlevel performance,
 we have used the CheriBSD 22.12 hybrid kernel.
 Debugging features such as kernel invariants checking (INVARIANTS) and dynamic
-kernel lock order verification (WITNESS) are left enabled, and should not
+kernel lock order verification (WITNESS) are left enabled, but should not
 contribute significantly for these workloads.
 Userlevel malloc debugging is disabled. CheriBSD is compiled with -O2,
 including its system libraries.</p>
@@ -659,7 +659,7 @@ this ABI.</li>
 stall in address translation.
 This exception is motivated by MMU support for capability tracking, used for
 heap temporal memory safety in CHERI.
-The underlying Armv8.2 architecture targeted by the initial Neoverse N1 has
+The underlying Armv8.2-A architecture targeted by the initial Neoverse N1 has
 no concept of data-dependent exceptions on stores, and that
 micro-architecture does not have a structure that supports data-dependent
 exceptions for stores in an efficient way.
@@ -738,7 +738,7 @@ facilitate performance analysis and modeling.</p>
 extensions would introduce micro-architectural enhancements to address the
 performance limitations; therefore the Benchmark ABI is a temporary measure to
 facilitate comparisons using the Morello prototype.</p>
-<h2 id="p128-and-p128-forced-got-compilation"><a class="header" href="#p128-and-p128-forced-got-compilation">P128 and P128 Forced-GOT compilation</a></h2>
+<h2 id="p128-and-p128-forced-got-compilation"><a class="header" href="#p128-and-p128-forced-got-compilation">P128 and P128 Forced GOT compilation</a></h2>
 <p>The intention of these code-generation modes is to enable performance
 measurements for the essential overheads of pure-capability code, under the
 assumption that pointer-size growth is the primary essential overhead to
@@ -878,7 +878,7 @@ only 64-bit values are loaded and stored.
 For implied register saves and restores, storage is not widened.
 GOT entries, including those used for the PLT, remain 64 bit.</p>
 <h2 id="p128-w-data-dependency-fix-w-larger-store-queue"><a class="header" href="#p128-w-data-dependency-fix-w-larger-store-queue">P128 (w/ data-dependency fix) (w/ larger store queue)</a></h2>
-<p>This configuration is identical to the P128 Forced-GOT configuration except
+<p>This configuration is identical to the P128 Forced GOT configuration except
 that access to globals is sometimes performed via PC, bypassing GOT entries
 in configurations where aarch64 would offer the same choice
 — e.g., when performing read-only accesses to globals within the current
@@ -973,7 +973,7 @@ also very sensitive to compiler and linker choices regarding code layout and
 inlining.
 Toolchain support for the Benchmark ABI will be made available in
 September 2023.
-We anticipate that the next release of CheriBSD, targeted for mid-2023, will
+We anticipate that the next release of CheriBSD, targeted for late-2023, will
 support statically and dynamically linked binaries, as well as roughly 10K
 open-source packages, compiled to the Benchmark ABI to support third-party
 performance analysis on Morello.</p>
@@ -1013,7 +1013,7 @@ as investigating (and adjusting) additional microarchitectural data structures
 that were left unchanged from the Neoverse N1 design.</p>
 </li>
 <li>
-<p>Develop and publicize a model based on performance counters for estimating
+<p>Developing and publicizing a model based on performance counters for estimating
 performance overhead contributions from various essential and non-essential
 factors on Morello.
 This may make it easier to estimate potential performance behavior for future
