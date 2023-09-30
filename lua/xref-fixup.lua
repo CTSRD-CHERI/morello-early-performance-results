@@ -1,5 +1,3 @@
-traverse = "topdown"
-
 function filepathtoid(filepath)
 	local normalised = pandoc.path.normalize(filepath)
 	-- normalize doesn't squash ".." components, but we want to
