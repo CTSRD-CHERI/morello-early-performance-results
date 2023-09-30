@@ -41,10 +41,10 @@ footprint essential to analyzing pure-capability performance overheads.
 
 Using the Benchmark ABI requires a mildly patched kernel and recompilation of
 code to use the new branching behavior.
-To support dynamically linked code, the Benchmark ABI will also require minor
+To support dynamically linked code, the Benchmark ABI also requires minor
 changes to the run-time linker.
-While the current patches are an experimental prototype, we are exploring
-exporting this feature for third-party use in performance measurement.
+We intend to provide this feature in the next release of CheriBSD for
+third-party use in performance measurement.
 It is important to note that the Benchmark ABI should not be used for security
 analysis and experimentation, as its protections are intentionally reduced to
 facilitate performance analysis and modeling.
