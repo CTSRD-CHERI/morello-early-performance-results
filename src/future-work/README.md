@@ -13,7 +13,7 @@ also very sensitive to compiler and linker choices regarding code layout and
 inlining.
 Toolchain support for the Benchmark ABI will be made available in
 September 2023.
-We anticipate that the next release of CheriBSD, targeted for mid-2023, will
+We anticipate that the next release of CheriBSD, targeted for late-2023, will
 support statically and dynamically linked binaries, as well as roughly 10K
 open-source packages, compiled to the Benchmark ABI to support third-party
 performance analysis on Morello.
@@ -49,7 +49,7 @@ many cases, avoiding this indirection.
 as investigating (and adjusting) additional microarchitectural data structures
 that were left unchanged from the Neoverse N1 design.
 
-* Develop and publicize a model based on performance counters for estimating
+* Developing and publicizing a model based on performance counters for estimating
 performance overhead contributions from various essential and non-essential
 factors on Morello.
 This may make it easier to estimate potential performance behavior for future

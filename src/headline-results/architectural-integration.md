@@ -8,7 +8,7 @@ a deemphasis of architectural exceptions during register-to-register
 operations, the introduction of a “capability mode” that enables capability
 addressing for existing load and store instructions to conserve opcode space,
 and integrating CHERI with other contemporary architectural features such as
-hypervisor extensions that had not been present in earlier MIPS-based CHERI
+hypervisor extensions that were not present in earlier MIPS-based CHERI
 prototypes.
 
 These architectural extensions are described in detail in [Arm’s Morello

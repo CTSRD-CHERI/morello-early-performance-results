@@ -56,7 +56,7 @@ Our experiments set up comparisons between five forms of code:
   footprints are widened to 128 bits from 64 bits, while still implemented as
   64-bit integers rather than capabilities.
   See below for more information on this compilation mode.
-* **P128 Forced-GOT code**, which, unlike P128, which allows access to global
+* **P128 Forced GOT code**, which, unlike P128, which allows access to global
   variables via PC-derived pointers, forces the indirection of all global
   access via a Global Offset Table (GOT) to emulate the potential worst-case
   addition of capability indirection that could be experienced with
@@ -82,7 +82,7 @@ substantial dynamic performance analysis and optimization, but with the
 limitation that hybrid code might be able to achieve better performance if it
 used highly optimized copying routines not yet available for CHERI-generated
 code.
-Another consideration is that the baseline Armv8.2-a architecture underlying
+Another consideration is that the baseline Armv8.2-A architecture underlying
 Morello predates [dedicated memory-copy
 instructions](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-a-profile-architecture-developments-2021)
 [[WEI21]](../bibliography/#WEI21).
@@ -93,7 +93,7 @@ hardware-based optimization for capability-enabled memory copying.
 For the purposes of these measurements, which focus on userlevel performance,
 we have used the CheriBSD 22.12 hybrid kernel.
 Debugging features such as kernel invariants checking (INVARIANTS) and dynamic
-kernel lock order verification (WITNESS) are left enabled, and should not
+kernel lock order verification (WITNESS) are left enabled, but should not
 contribute significantly for these workloads.
 Userlevel malloc debugging is disabled. CheriBSD is compiled with -O2,
 including its system libraries.

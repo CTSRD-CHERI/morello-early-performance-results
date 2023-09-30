@@ -17,7 +17,7 @@ The following microarchitecture limitations arose due to the constrained timelin
   stall in address translation.
   This exception is motivated by MMU support for capability tracking, used for
   heap temporal memory safety in CHERI.
-  The underlying Armv8.2 architecture targeted by the initial Neoverse N1 has
+  The underlying Armv8.2-A architecture targeted by the initial Neoverse N1 has
   no concept of data-dependent exceptions on stores, and that
   micro-architecture does not have a structure that supports data-dependent
   exceptions for stores in an efficient way.

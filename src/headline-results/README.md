@@ -9,4 +9,4 @@ respect to [architectural integration](architectural-integration.md),
 More detailed explorations of the performance framework and performance
 analysis results can be found in later sections [Performance
 methodology](../performance-methodology/) and [Performance analysis of SPECint
-2006)](../performance-analysis-spec/).
+2006](../performance-analysis-spec/).

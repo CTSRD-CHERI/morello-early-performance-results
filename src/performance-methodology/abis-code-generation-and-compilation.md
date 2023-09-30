@@ -54,7 +54,7 @@ extensions would introduce micro-architectural enhancements to address the
 performance limitations; therefore the Benchmark ABI is a temporary measure to
 facilitate comparisons using the Morello prototype.
 
-## P128 and P128 Forced-GOT compilation
+## P128 and P128 Forced GOT compilation
 
 The intention of these code-generation modes is to enable performance
 measurements for the essential overheads of pure-capability code, under the
