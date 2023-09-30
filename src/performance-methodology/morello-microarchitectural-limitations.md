@@ -20,7 +20,10 @@ The following microarchitecture limitations arose due to the constrained timelin
   The underlying Armv8.2-A architecture targeted by the initial Neoverse N1 has
   no concept of data-dependent exceptions on stores, and that
   micro-architecture does not have a structure that supports data-dependent
-  exceptions for stores in an efficient way.
+  exceptions for stores in an efficient way. Therefore for capability stores an
+  artificial stall is introduced for address translation &mdash; which can
+  raise an exception &mdash; until the data is available, if not already
+  available.
   Arm's Memory Tagging Extensions (MTE) have a similar requirement and so more
   recent Arm microarchitectures are much more optimized in this regard.
 * **Untuned store throughput and buffer sizes** due to memory buses not having
