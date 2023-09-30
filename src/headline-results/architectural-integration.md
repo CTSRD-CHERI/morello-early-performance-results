@@ -17,7 +17,7 @@ specification](https://developer.arm.com/documentation/ddi0606/latest)
 [[ARM22]](../bibliography/#ARM22), with SRI International and the University
 of Cambridge’s [CHERI
 ISAv8](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-951.pdf)
-[[WAT20]](../bibliography/#WAT20) providing more detailed rationale for
+[[WAT20A]](../bibliography/#WAT20A) providing more detailed rationale for
 aspects of the design and its implications for microarchitecture.
 [Machine-checked formal
 proof](http://www.cl.cam.ac.uk/~pes20/morello-proofs-esop2022.pdf)

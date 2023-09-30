@@ -32,8 +32,17 @@ Robert N. M. Watson, Simon W. Moore, Peter Sewell, and Peter G. Neumann.
 CHERI*](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-941.pdf),
 Technical Report UCAM-CL-TR-941, Computer Laboratory, September 2019.
 
-<a name="WAT20"></a>
-[WAT20]
+<a name="WAT20A"></a>
+[WAT20A]
+Robert N. M. Watson, Alexander Richardson, Brooks Davis, John Baldwin,
+David Chisnall, Jessica Clarke, Nathaniel Filardo, Simon W. Moore,
+Edward Napierala, Peter Sewell, and Peter G. Neumann.
+[*CHERI C/C++ Programming
+Guide*](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-947.pdf), Technical
+Report UCAM-CL-TR-947, Computer Laboratory, June 2020.
+
+<a name="WAT20B"></a>
+[WAT20B]
 Robert N. M. Watson, Peter G. Neumann, Jonathan Woodruff, Michael Roe,
 Hesham Almatary, Jonathan Anderson, John Baldwin, Graeme Barnes,
 David Chisnall, Jessica Clarke, Brooks Davis, Lee Eisen,
