@@ -16,7 +16,7 @@ of this work (including the specific SPECint subset used, compilation choices,
 implications of using the ‘train’ workload, and why), may be found in Section
 [3](../performance-methodology/).
 
-![Chart: Mean SPECint overheads for memory-safey code on Morello
+![Chart: Mean SPECint overheads for memory-safety code on Morello
   (FPGA)](specint-overhead-summary.svg)
 
 ## Result on unmodified Morello microarchitecture on FPGA
