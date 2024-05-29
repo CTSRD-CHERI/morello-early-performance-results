@@ -5,18 +5,15 @@ taped-out Morello design, and now continuing on FPGA, remains at an early
 stage, with many next steps to take.
 These include:
 
-* Enabling third-party use of the “Benchmark ABI” to allow reproduction of our
-results, as well as application of the approach to other workloads.
+* Application of the “Benchmark ABI” and this approach to other workloads.
 This is an important step, as limitations on speculation for short function
 executions can have a disproportionate impact on certain workloads, and is
 also very sensitive to compiler and linker choices regarding code layout and
 inlining.
-Toolchain support for the Benchmark ABI will be made available in
-September 2023.
-We anticipate that the next release of CheriBSD, targeted for late-2023, will
-support statically and dynamically linked binaries, as well as roughly 10K
-open-source packages, compiled to the Benchmark ABI to support third-party
-performance analysis on Morello.
+Toolchain support for the Benchmark ABI was made available in December 2023 as
+part of the CheriBSD 23.11 release, which supports statically and dynamically
+linked binaries, as well as roughly 10K open-source packages, compiled to the
+Benchmark ABI to support third-party performance analysis on Morello.
 
 * Improving the completeness of the P128 compilation mode and ABI, which will
 allow us to better project future performance not just on the Morello design,

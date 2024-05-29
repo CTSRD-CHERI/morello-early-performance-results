@@ -17,7 +17,7 @@ implications of using the ‘train’ workload, and why), may be found in Sectio
 [3](../performance-methodology/).
 
 ![Chart: Mean SPECint overheads for memory-safe code on Morello
-  (FPGA)](specint-overhead-summary.svg)
+  (FPGA, dynamically-linked)](specint-overhead-summary-dynamic.svg)
 
 ## Result on unmodified Morello microarchitecture on FPGA
 
@@ -25,7 +25,7 @@ Using an unmodified FPGA implementation of Morello (i.e., based on RTL used
 for first-generation Morello hardware), and employing software adaptations in
 the Benchmark ABI that compensate for Morello limitations such as those
 relating to capability-enabled branch prediction, we were able to achieve a
-**14.97% geometric mean overhead across the training workload of the SPECint
+**15.17% geometric mean overhead across the training workload of the SPECint
 2006 benchmark suite with "pure capability" (memory-safe) code generation**.
 
 ## Result on improved Morello microarchitecture on FPGA
@@ -33,21 +33,21 @@ relating to capability-enabled branch prediction, we were able to achieve a
 Using modified FPGA implementations of Morello developed after chip tapeout,
 to work around a costly microarchitectural data-dependent exception check and
 store queue pressure, which had been highlighted by performance counter results
-from dynamic workloads, we were able to achieve **7.40% (solely working around
-the data-dependent check) and 5.70% (working around both the data-dependent
+from dynamic workloads, we were able to achieve **7.72% (solely working around
+the data-dependent check) and 6.28% (working around both the data-dependent
 check and increasing the store queue size) geometric mean overheads for the
 training workload of SPECint 2006 with "pure capability" code generation, with
 the Benchmark ABI, on incrementally modified Morello designs**.
 Analysis of the exception delivery issue suggests that more recent
 (post-Neoverse N1) microarchitectures already contain the changed behavior
-required to enable the data-dependence optimization such that this roughly 51%
+required to enable the data-dependence optimization such that this roughly 50%
 of the overhead seen on the original Morello design (i.e., without the
 data-dependency fix) could be decreased or eliminated.
 Store queue sizes in the original Morello design were not re-tuned in the
 presence of wider capabilities and were left tuned for baseline aarch64
 workloads, but a future optimized design would take such increased pressure
 into consideration.
-Expanding the Morello store queues achieves a further roughly 23% reduction in
+Expanding the Morello store queues achieves a further roughly 19% reduction in
 overhead relative to the modified design with the data-dependency fix.
 
 ## Modeled result using P128 on improved Morello microarchitecture on FPGA
@@ -59,7 +59,7 @@ pointer memory footprint &mdash; the essential cost to the CHERI extensions
 Morello microarchitecture.
 Using this modified compiler and a Morello FPGA implementation with the above
 microarchitectural improvements, we were able to achieve **an estimate of
-between 1.8% and 3.0% geometric mean overhead for the training workload of
+between 2.2% and 3.2% geometric mean overhead for the training workload of
 SPECint 2006 for "pure capability" code generation on a modified Morello
 design**.
 This figure is intended to reflect and compensate for microarchitectural
@@ -69,7 +69,7 @@ continue to investigate using modified Morello designs.
 
 ## Conclusion from initial measurements
 
-**The above 1.8% to 3.0% is our current best estimate of the geometric mean
+**The above 2.2% to 3.2% is our current best estimate of the geometric mean
 overhead that would be incurred for a future optimized design (though further
 improvements beyond that may well be possible, including to compiler code
 generation)**.
