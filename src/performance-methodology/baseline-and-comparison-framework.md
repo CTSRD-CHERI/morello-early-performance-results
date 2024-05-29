@@ -91,17 +91,25 @@ propagation, and bounds enforcement, they would enable comparable
 hardware-based optimization for capability-enabled memory copying.
 
 For the purposes of these measurements, which focus on userlevel performance,
-we have used the CheriBSD 22.12 hybrid kernel.
+we have used the CheriBSD 23.11 hybrid kernel.
 Debugging features such as kernel invariants checking (INVARIANTS) and dynamic
 kernel lock order verification (WITNESS) are left enabled, but should not
 contribute significantly for these workloads.
 Userlevel malloc debugging is disabled. CheriBSD is compiled with -O2,
 including its system libraries.
 
-The SPECint benchmark suite is compiled with -O3. SPEC is statically linked in
-all presented results.
+The SPECint benchmark suite is compiled with -O3.
+SPEC is dynamically linked in all presented results unless otherwise stated.
 
-By default, CheriBSD 22.12 ships with unoptimized third-party libraries (compiled with -O0), to improve debugging in the initial release, and those would not be suitable for benchmarking; we intend to provide packages built with optimizations enabled in the future. SPECint does not have external software dependencies beyond those in the CheriBSD base system (e.g., `libc`, `libunwind`, `libcxxrt`, `libm`, and `libgcc_s`), and so our work is not affected. If we were dependent on third-party packages, as might be true of other benchmark suites, we would need to investigate optimization settings for those packages.
+By default, CheriBSD 23.11 ships with optimized third-party libraries, but to
+improve debugging, unoptimized versions (compiled with -O0) are also available,
+and those would not be suitable for benchmarking.
+SPECint does not have external software dependencies beyond those in the
+CheriBSD base system (e.g., `libc`, `libunwind`, `libcxxrt`, `libm`, and
+`libgcc_s`), and so our work is not affected by the version used.
+If we were dependent on third-party packages, as might be true of other
+benchmark suites, we would need to investigate optimization settings for those
+packages.
 
 [^1]: The FPGA setup used in these measurements does not implement thermal
 throttling.
