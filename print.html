@@ -450,33 +450,33 @@ information, further results from additional configurations, and limitations
 of this work (including the specific SPECint subset used, compilation choices,
 implications of using the ‘train’ workload, and why), may be found in Section
 <a href="headline-results/../performance-methodology/">3</a>.</p>
-<p><img src="headline-results/specint-overhead-summary.svg" alt="Chart: Mean SPECint overheads for memory-safe code on Morello (FPGA)" /></p>
+<p><img src="headline-results/specint-overhead-summary-dynamic.svg" alt="Chart: Mean SPECint overheads for memory-safe code on Morello (FPGA, dynamically-linked)" /></p>
 <h2 id="result-on-unmodified-morello-microarchitecture-on-fpga"><a class="header" href="#result-on-unmodified-morello-microarchitecture-on-fpga">Result on unmodified Morello microarchitecture on FPGA</a></h2>
 <p>Using an unmodified FPGA implementation of Morello (i.e., based on RTL used
 for first-generation Morello hardware), and employing software adaptations in
 the Benchmark ABI that compensate for Morello limitations such as those
 relating to capability-enabled branch prediction, we were able to achieve a
-<strong>14.97% geometric mean overhead across the training workload of the SPECint
+<strong>15.17% geometric mean overhead across the training workload of the SPECint
 2006 benchmark suite with &quot;pure capability&quot; (memory-safe) code generation</strong>.</p>
 <h2 id="result-on-improved-morello-microarchitecture-on-fpga"><a class="header" href="#result-on-improved-morello-microarchitecture-on-fpga">Result on improved Morello microarchitecture on FPGA</a></h2>
 <p>Using modified FPGA implementations of Morello developed after chip tapeout,
 to work around a costly microarchitectural data-dependent exception check and
 store queue pressure, which had been highlighted by performance counter results
-from dynamic workloads, we were able to achieve <strong>7.40% (solely working around
-the data-dependent check) and 5.70% (working around both the data-dependent
+from dynamic workloads, we were able to achieve <strong>7.72% (solely working around
+the data-dependent check) and 6.28% (working around both the data-dependent
 check and increasing the store queue size) geometric mean overheads for the
 training workload of SPECint 2006 with &quot;pure capability&quot; code generation, with
 the Benchmark ABI, on incrementally modified Morello designs</strong>.
 Analysis of the exception delivery issue suggests that more recent
 (post-Neoverse N1) microarchitectures already contain the changed behavior
-required to enable the data-dependence optimization such that this roughly 51%
+required to enable the data-dependence optimization such that this roughly 50%
 of the overhead seen on the original Morello design (i.e., without the
 data-dependency fix) could be decreased or eliminated.
 Store queue sizes in the original Morello design were not re-tuned in the
 presence of wider capabilities and were left tuned for baseline aarch64
 workloads, but a future optimized design would take such increased pressure
 into consideration.
-Expanding the Morello store queues achieves a further roughly 23% reduction in
+Expanding the Morello store queues achieves a further roughly 19% reduction in
 overhead relative to the modified design with the data-dependency fix.</p>
 <h2 id="modeled-result-using-p128-on-improved-morello-microarchitecture-on-fpga"><a class="header" href="#modeled-result-using-p128-on-improved-morello-microarchitecture-on-fpga">Modeled result using P128 on improved Morello microarchitecture on FPGA</a></h2>
 <p>To model future microarchitectural improvements, we utilized modified aarch64
@@ -486,7 +486,7 @@ pointer memory footprint — the essential cost to the CHERI extensions
 Morello microarchitecture.
 Using this modified compiler and a Morello FPGA implementation with the above
 microarchitectural improvements, we were able to achieve <strong>an estimate of
-between 1.8% and 3.0% geometric mean overhead for the training workload of
+between 2.2% and 3.2% geometric mean overhead for the training workload of
 SPECint 2006 for &quot;pure capability&quot; code generation on a modified Morello
 design</strong>.
 This figure is intended to reflect and compensate for microarchitectural
@@ -494,7 +494,7 @@ effects arising from a lack of optimization in the Morello implementation,
 such as instruction scheduling limitations, and other related factors, which we
 continue to investigate using modified Morello designs.</p>
 <h2 id="conclusion-from-initial-measurements"><a class="header" href="#conclusion-from-initial-measurements">Conclusion from initial measurements</a></h2>
-<p><strong>The above 1.8% to 3.0% is our current best estimate of the geometric mean
+<p><strong>The above 2.2% to 3.2% is our current best estimate of the geometric mean
 overhead that would be incurred for a future optimized design (though further
 improvements beyond that may well be possible, including to compiler code
 generation)</strong>.</p>
@@ -635,15 +635,23 @@ If these new instructions were suitably adapted to handle CHERI alignment, tag
 propagation, and bounds enforcement, they would enable comparable
 hardware-based optimization for capability-enabled memory copying.</p>
 <p>For the purposes of these measurements, which focus on userlevel performance,
-we have used the CheriBSD 22.12 hybrid kernel.
+we have used the CheriBSD 23.11 hybrid kernel.
 Debugging features such as kernel invariants checking (INVARIANTS) and dynamic
 kernel lock order verification (WITNESS) are left enabled, but should not
 contribute significantly for these workloads.
 Userlevel malloc debugging is disabled. CheriBSD is compiled with -O2,
 including its system libraries.</p>
-<p>The SPECint benchmark suite is compiled with -O3. SPEC is statically linked in
-all presented results.</p>
-<p>By default, CheriBSD 22.12 ships with unoptimized third-party libraries (compiled with -O0), to improve debugging in the initial release, and those would not be suitable for benchmarking; we intend to provide packages built with optimizations enabled in the future. SPECint does not have external software dependencies beyond those in the CheriBSD base system (e.g., <code>libc</code>, <code>libunwind</code>, <code>libcxxrt</code>, <code>libm</code>, and <code>libgcc_s</code>), and so our work is not affected. If we were dependent on third-party packages, as might be true of other benchmark suites, we would need to investigate optimization settings for those packages.</p>
+<p>The SPECint benchmark suite is compiled with -O3.
+SPEC is dynamically linked in all presented results unless otherwise stated.</p>
+<p>By default, CheriBSD 23.11 ships with optimized third-party libraries, but to
+improve debugging, unoptimized versions (compiled with -O0) are also available,
+and those would not be suitable for benchmarking.
+SPECint does not have external software dependencies beyond those in the
+CheriBSD base system (e.g., <code>libc</code>, <code>libunwind</code>, <code>libcxxrt</code>, <code>libm</code>, and
+<code>libgcc_s</code>), and so our work is not affected by the version used.
+If we were dependent on third-party packages, as might be true of other
+benchmark suites, we would need to investigate optimization settings for those
+packages.</p>
 <div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
 <p>The FPGA setup used in these measurements does not implement thermal
 throttling.</p>
@@ -735,12 +743,8 @@ particular, function pointers, PLT GOT entries, and return addresses all
 remain capability width, and are loaded, stored, and passed around as such,
 despite being used as integers in branch instructions, retaining the in-memory
 footprint essential to analyzing pure-capability performance overheads.</p>
-<p>Using the Benchmark ABI requires a mildly patched kernel and recompilation of
-code to use the new branching behavior.
-To support dynamically linked code, the Benchmark ABI also requires minor
-changes to the run-time linker.
-We intend to provide this feature in the next release of CheriBSD for
-third-party use in performance measurement.
+<p>Using the Benchmark ABI requires recompilation of code to use the new branching
+behavior and at least CheriBSD 23.11.
 It is important to note that the Benchmark ABI should not be used for security
 analysis and experimentation, as its protections are intentionally reduced to
 facilitate performance analysis and modeling.</p>
@@ -815,7 +819,9 @@ but as-yet unresolved compiler issues affecting comparability:</p>
 <tr><td>462.libquantum</td><td>Quantum computer simulation</td><td>P128 benchmark runs 30% faster than the aarch64 version since 128-bit integer pointers inhibit vectorization in a case where vectorization turns out to be harmful on the N1SDP microarchitecture.</td></tr>
 </tbody></table>
 </div>
-<p>All benchmark binaries are compiled at -O3, and are statically linked.</p>
+<p>All benchmark binaries are compiled at -O3.
+This report focuses on dynamically-linked binaries, but results are also
+provided for statically-linked binaries.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="specific-hardware-and-software-configurations"><a class="header" href="#specific-hardware-and-software-configurations">Specific hardware and software configurations</a></h1>
 <p>The following software and hardware configurations were used in these
 benchmarks.
@@ -904,19 +910,19 @@ exception issue; as above, the microarchitectural change should not affect
 this workload.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="initial-results"><a class="header" href="#initial-results">Initial results</a></h1>
 <p>Using the baseline pure-capability code generation combined with an unmodified
-microarchitecture yields 28.01% geometric mean overhead for the training
+microarchitecture yields 30.48% geometric mean overhead for the training
 workload of SPECint 2006.</p>
 <p>Working around dependence on unpredicted PCC bounds when performing a
 capability-based jump using the Benchmark ABI combined with an unmodified
-microarchitecture, this is reduced to 14.97% geometric mean overhead (a 46.6%
+microarchitecture, this is reduced to 15.17% geometric mean overhead (a 50.2%
 reduction).</p>
 <p>Applying a microarchitectural fix to the data-dependent exception issue, and
-measuring using the Benchmark ABI yields a 7.40% geometric mean overhead (a
-further 50.1% overhead reduction).</p>
+measuring using the Benchmark ABI yields a 7.72% geometric mean overhead (a
+further 49.1% overhead reduction).</p>
 <p>Increasing the size of the store queues, and measuring using the Benchmark ABI
-yields a 5.70% geometric mean overhead (a futher 23.0% overhead reduction).</p>
+yields a 6.28% geometric mean overhead (a futher 18.7% overhead reduction).</p>
 <p>Using the P128 Forced GOT and P128 compilation modes gives an upper bound
-estimated overhead of 3.0% and lower bound estimated overhead of 1.8%.</p>
+estimated overhead of 3.2% and lower bound estimated overhead of 2.2%.</p>
 <p>Performance-counter data gathered during these experiments suggests that
 further non-essential architectural and microarchitectural overheads exist,
 including inefficient code generation around the MADD instruction.</p>
@@ -925,7 +931,16 @@ of software and hardware, it is reasonable to project that the goal of 2%-3%
 overhead for deterministic spatial and referential memory safety is achievable
 with an optimized instruction-set architecture on a performance-optimized
 microarchitecture.</p>
-<p><img src="performance-analysis-spec/specint-detailed-results.svg" alt="Chart: SPECint performance overheads across ABIs and hardware implementation variations (all measured on FPGA)" /></p>
+<p><img src="performance-analysis-spec/specint-detailed-results-dynamic.svg" alt="Chart: SPECint performance overheads across ABIs and hardware implementation variations (all measured on FPGA, dynamically-linked)" /></p>
+<p>Using statically-linked code yields a similar pattern for the geometric mean
+overheads across all the different ABIs and hardware configurations, albeit
+each slightly lower than the dynamically-linked counterpart.</p>
+<p><img src="performance-analysis-spec/specint-overhead-summary-static.svg" alt="Chart: Mean SPECint overheads for memory-safe code on Morello (FPGA, statically-linked)" /></p>
+<p>Looking at individual benchmarks, we again see a similar picture as for
+dynamically-linked code, with the overhead for baseline pure-capability code
+generation being slightly lower for a couple of benchmarks that see very high
+overhead without the Benchmark ABI.</p>
+<p><img src="performance-analysis-spec/specint-detailed-results-static.svg" alt="Chart: SPECint performance overheads across ABIs and hardware implementation variations (all measured on FPGA, statically-linked)" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="caveats"><a class="header" href="#caveats">Caveats</a></h1>
 <p>We have presented early evaluation of the performance properties of the taped
 out Morello prototype and modified Morello designs running on FPGA.
@@ -975,18 +990,15 @@ stage, with many next steps to take.
 These include:</p>
 <ul>
 <li>
-<p>Enabling third-party use of the “Benchmark ABI” to allow reproduction of our
-results, as well as application of the approach to other workloads.
+<p>Application of the “Benchmark ABI” and this approach to other workloads.
 This is an important step, as limitations on speculation for short function
 executions can have a disproportionate impact on certain workloads, and is
 also very sensitive to compiler and linker choices regarding code layout and
 inlining.
-Toolchain support for the Benchmark ABI will be made available in
-September 2023.
-We anticipate that the next release of CheriBSD, targeted for late-2023, will
-support statically and dynamically linked binaries, as well as roughly 10K
-open-source packages, compiled to the Benchmark ABI to support third-party
-performance analysis on Morello.</p>
+Toolchain support for the Benchmark ABI was made available in December 2023 as
+part of the CheriBSD 23.11 release, which supports statically and dynamically
+linked binaries, as well as roughly 10K open-source packages, compiled to the
+Benchmark ABI to support third-party performance analysis on Morello.</p>
 </li>
 <li>
 <p>Improving the completeness of the P128 compilation mode and ABI, which will
@@ -1051,6 +1063,7 @@ We also acknowledge Arm Limited and Google, Inc.</p>
 <ul>
 <li><strong>15 August 2023</strong> Initial public release</li>
 <li><strong>22 August 2023</strong> Added results of store-queue expansion</li>
+<li><strong>29 May 2024</strong> Updated for CheriBSD 23.11 and added results for dynamic linking</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="bibliography"><a class="header" href="#bibliography">Bibliography</a></h1>
 <p><a name="ARM22"></a>
