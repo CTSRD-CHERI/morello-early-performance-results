@@ -259,7 +259,14 @@ Debugging features such as kernel invariants checking (INVARIANTS) and dynamic
 kernel lock order verification (WITNESS) are left enabled, but should not
 contribute significantly for these workloads.
 Userlevel malloc debugging is disabled. CheriBSD is compiled with -O2,
-including its system libraries.</p>
+including its system libraries.
+Userlevel heap temporal safety is disabled.
+This version of CheriBSD should be used if attempting to reproduce these specific results.
+However, it is recommended that the latest version be used for other
+measurements, especially if evaluating more experimental features, such as heap
+temporal safety or compartmentalisation, since these are in active development
+and their implementations will evolve as we come to better understand their
+performance.</p>
 <p>The SPECint benchmark suite is compiled with -O3.
 SPEC is dynamically linked in all presented results unless otherwise stated.</p>
 <p>By default, CheriBSD 23.11 ships with optimized third-party libraries, but to
