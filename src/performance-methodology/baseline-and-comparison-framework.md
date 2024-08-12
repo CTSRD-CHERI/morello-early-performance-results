@@ -97,6 +97,7 @@ kernel lock order verification (WITNESS) are left enabled, but should not
 contribute significantly for these workloads.
 Userlevel malloc debugging is disabled. CheriBSD is compiled with -O2,
 including its system libraries.
+Userlevel heap temporal safety is disabled.
 
 The SPECint benchmark suite is compiled with -O3.
 SPEC is dynamically linked in all presented results unless otherwise stated.
