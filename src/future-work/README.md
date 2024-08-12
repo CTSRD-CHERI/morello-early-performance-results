@@ -52,4 +52,9 @@ factors on Morello.
 This may make it easier to estimate potential performance behavior for future
 microarchitectures using measurements taken on the current microarchitecture.
 
+* Measuring and understanding the overhead from revocation-based heap temporal
+safety, part of the CheriBSD 23.11 release, library-based compartmentalisation,
+available as an experimental opt-in feature since CheriBSD 23.11, and
+coprocess-based compartmentalisation.
+
 As this work proceeds, we will continue to update this living document.
