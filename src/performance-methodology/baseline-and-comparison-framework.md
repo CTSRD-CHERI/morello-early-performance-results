@@ -98,6 +98,12 @@ contribute significantly for these workloads.
 Userlevel malloc debugging is disabled. CheriBSD is compiled with -O2,
 including its system libraries.
 Userlevel heap temporal safety is disabled.
+This version of CheriBSD should be used if attempting to reproduce these specific results.
+However, it is recommended that the latest version be used for other
+measurements, especially if evaluating more experimental features, such as heap
+temporal safety or compartmentalisation, since these are in active development
+and their implementations will evolve as we come to better understand their
+performance.
 
 The SPECint benchmark suite is compiled with -O3.
 SPEC is dynamically linked in all presented results unless otherwise stated.
